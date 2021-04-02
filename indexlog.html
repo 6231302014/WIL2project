@@ -44,6 +44,8 @@
 			window.location.href = 'index.html';
 		}else if($("#email").val() == 'admin' && $("#password").val() == '1234'){
 			window.location.href = 'admin-request.html'
+		}else if($("#email").val() == 'superadmin' && $("#password").val() == '1234'){
+			window.location.href = "manage_user.html"
 		}else{
 			Swal.fire({
                     icon: 'error',
