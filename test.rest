@@ -1,0 +1,6 @@
+POST http://localhost:3000/verifyUser
+Content-Type: application/json
+
+{
+    "token": "",
+}
