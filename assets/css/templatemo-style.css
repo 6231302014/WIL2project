@@ -996,16 +996,16 @@ section.buttons .container-fluid {
     z-index: 10000;
 }
 
-#sidebar .toggle:before {
+/* #sidebar .toggle:before {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
     text-transform: none !important;
-}
+} */
 
-#sidebar .toggle:before {
+/* #sidebar .toggle:before {
     content: '\f0c9';
     font-size: 2rem;
     height: inherit;
@@ -1015,30 +1015,30 @@ section.buttons .container-fluid {
     text-indent: 0;
     top: 0;
     width: inherit;
-}
+} */
 
 #sidebar.inactive {
     margin-left: -420px;
 }
 
-@media screen and (max-width: 1680px) {
+@media screen and (max-width: 1900px) {
     #sidebar {
-        width: 380px;
+        width: 300px;
     }
     #sidebar > .inner {
         padding: 0px 30px;
-        width: 380px;
+        width: 300px;
     }
-    #sidebar .toggle {
+    /* #sidebar .toggle {
         height: 100px;
-        left: 380px;
+        left: 205px;
         line-height: 100px;
-    }
-    #sidebar .toggle:before {
+    } */
+    /* #sidebar .toggle:before {
         font-size: 24px;
-    }
+    } */
     #sidebar.inactive {
-        margin-left: -380px;
+        margin-left: 0px;
     }
     #sidebar > .inner > #search  {
 	    width: 380px;
@@ -1084,11 +1084,11 @@ section.buttons .container-fluid {
     #sidebar .toggle {
         width: 6em;
     }
-    #sidebar .toggle:before {
+    /* #sidebar .toggle:before {
         font-size: 1.5rem;
         color: #fff;
         background-color: rgba(83,91,160,0.75);
-    }
+    } */
     body.is-preload #sidebar {
         display: none;
     }
@@ -1204,7 +1204,7 @@ section.buttons .container-fluid {
     display: -ms-flex;
     display: flex;
     position: relative;
-    background-color: #535ba0;
+    background-color: #174A84;
     margin: -100px -100px 100px -100px;
 }
 
@@ -1311,6 +1311,7 @@ section.buttons .container-fluid {
     position: absolute;
     right: 0;
 }
+
 
 #menu ul a.opener:hover:before,
 #menu ul span.opener:hover:before {
