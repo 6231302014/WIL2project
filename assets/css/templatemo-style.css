@@ -956,7 +956,7 @@ section.buttons .container-fluid {
 	color: #fff;
 }
 
-#search form:before {
+/* #search form:before {
 	font-family: 'FontAwesome';
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -971,7 +971,7 @@ section.buttons .container-fluid {
     text-align: center;
     top: 35px;
     font-size: 18px;
-}
+} */
 
 #sidebar .toggle {
     text-decoration: none;
