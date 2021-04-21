@@ -27,7 +27,9 @@ app.post('/verifyUser',(req,res) =>{
        audience: process.env.CLIENT_ID
    }).then((ticket)=>{
        const payload = ticket.getPayload();
-       console.log(payload);
+    //    console.log(payload);
+    const email = payload.email;
+    console.log(email);
        res.end();
    }).catch((err)=>{
        console.log(err);
