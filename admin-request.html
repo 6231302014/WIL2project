@@ -30,6 +30,7 @@ https://templatemo.com/tm-529-ramayana
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.3.2/bootbox.min.js"></script>
+    <link rel="stylesheet" href="bgall.css">
 
 
 
@@ -273,7 +274,7 @@ https://templatemo.com/tm-529-ramayana
         <div class="modal" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    
+
 
                     <!-- Modal Header -->
                     <div class="modal-header">
@@ -285,9 +286,12 @@ https://templatemo.com/tm-529-ramayana
                     <div class="modal-body">
                         <h4>รายการ</h4>
                         <div id="textmenu">
-                            <li>กรรไกรตัดกระดาษ 6" 6 เล่ม <input type="number"  id="list1" value="0" style="width: 40px;"></li>
-                            <li>กระดาษ Carbon 3 กล่อง  <input type="number"  id="list2" value="0" style="width: 40px;"></li>
-                            <li>กระดาษ POSTIT3*3" 4 เล่ม  <input type="number"  id="list3" value="0" style="width: 40px;"></li>
+                            <li>กรรไกรตัดกระดาษ 6" 6 เล่ม <input type="number" id="list1" value="0"
+                                    style="width: 40px;"></li>
+                            <li>กระดาษ Carbon 3 กล่อง <input type="number" id="list2" value="0" style="width: 40px;">
+                            </li>
+                            <li>กระดาษ POSTIT3*3" 4 เล่ม <input type="number" id="list3" value="0" style="width: 40px;">
+                            </li>
                         </div>
 
                         <p></p>
@@ -299,80 +303,81 @@ https://templatemo.com/tm-529-ramayana
                     <div class="modal-footer">
                         <li>หมายเหตุ</li>
                         <input type="text">
-                      <button type="button" class="btn btn-success" data-dismiss="modal"
+                        <button type="button" class="btn btn-success" data-dismiss="modal"
                             id="btnapprove">อนุมัติ</button>
-                     
+
                     </div>
 
                 </div>
-            </div>
-    </div>
-       <!-- The Modal2 -->
-       <div class="modal" id="myModal2">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h3 class="modal-title">รายละเอียดเพิ่มเติม</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <h4>รายการ</h4>
-                    <div id="textmenu">
-                        <li>แปลงลบกระดาน 2 อัน <input type="number"  id="list1" value="2" style="width: 40px;"></li>
-                        <li>กระดาษ POSTIT3*3" 4 เล่ม  <input type="number"  id="list3" value="4" style="width: 40px;"></li>
-                    </div>
-
-                    <p></p>
-                    <h4>วัตถุประสงค์</h4>
-                    <li>ใช้ทำสื่อการสอน</li>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-success" data-dismiss="modal"
-                        id="btnapprove">อนุมัติ</button>
-                 
-                </div>
-
             </div>
         </div>
-</div>
-    <!-- Scripts -->
-    <script>
-        $(document).ready(function () {
-            $("#btnapprove").click(function () {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'ดำเนินการสำเร็จ',
-       
-                })
-                $("#waiting").text("อนุมัติ"); 
-                $("#waiting").toggleClass('text-warning text-success');
-                
+        <!-- The Modal2 -->
+        <div class="modal" id="myModal2">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h3 class="modal-title">รายละเอียดเพิ่มเติม</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <h4>รายการ</h4>
+                        <div id="textmenu">
+                            <li>แปลงลบกระดาน 2 อัน <input type="number" id="list1" value="2" style="width: 40px;"></li>
+                            <li>กระดาษ POSTIT3*3" 4 เล่ม <input type="number" id="list3" value="4" style="width: 40px;">
+                            </li>
+                        </div>
+
+                        <p></p>
+                        <h4>วัตถุประสงค์</h4>
+                        <li>ใช้ทำสื่อการสอน</li>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                            id="btnapprove">อนุมัติ</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Scripts -->
+        <script>
+            $(document).ready(function () {
+                $("#btnapprove").click(function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ดำเนินการสำเร็จ',
+
+                    })
+                    $("#waiting").text("อนุมัติ");
+                    $("#waiting").toggleClass('text-warning text-success');
+
+
+                });
+
 
             });
-           
-           
-        });
-    </script>
+        </script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/transition.js"></script>
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!-- sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/transition.js"></script>
+        <script src="assets/js/owl-carousel.js"></script>
+        <script src="assets/js/custom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- sweetalert2 -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 </body>
