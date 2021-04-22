@@ -17,7 +17,24 @@ function login() {
         // console.log('Image URL: ' + profile.getImageUrl());
         // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         const id_token = googleUser.getAuthResponse().id_token;        
-        console.log(id_token);
+        // console.log(id_token);
+
+         // Send token to server
+         $.ajax({
+            type: "POST",
+            url: "/verifyUser",
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            data: { token: id_token },
+            success: (response) => {
+                //  alert(response);
+                window.location.replace(response);
+            },
+            error: (xhr) => {
+                alert(xhr.responseText);
+            }
+        });
+    }).catch((err) => {
+        console.log(err);
     });
 
 
