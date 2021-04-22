@@ -18,19 +18,14 @@ app.use(session({
    saveUninitialized: false
 }));
 
-
 app.set('view engine','ejs');
 app.use(express.static(path.join(__dirname,'vendo')));
 app.use(express.static(path.join(__dirname,'assets')));
-app.use(express.static(path.join(__dirname,'css')));
-app.use(express.static(path.join(__dirname,'css2')));
+app.use(express.static(path.join(__dirname, 'css')));
 app.use(express.static(path.join(__dirname,'images')));
 app.use(express.static(path.join(__dirname,'public')));
-app.use(express.static(path.join(__dirname,'js')));
-app.use(express.static(path.join(__dirname,'lbs')));
-app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-
+app.use(express.urlencoded({extended:true}));
 // =============== Page routes ==================
 app.get('/',(req,res) => {
     if(req.session.user){
@@ -41,7 +36,29 @@ app.get('/',(req,res) => {
 });
 
 app.get('/index',checkUser,(req,res) => {
-        res.render('index',{user: req.session.user});
+    res.sendFile(path.join(__dirname, "/index.html"));
+        // res.render('index',{user: req.session.user});
+   
+
+});
+
+app.get('/userrecord',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/user_history_edit.html"));
+        // res.render('index',{user: req.session.user});
+   
+
+});
+
+app.get('/inven',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/inven.html"));
+        // res.render('index',{user: req.session.user});
+   
+
+});
+
+app.get('/manageuser',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/manage_user.html"));
+        // res.render('index',{user: req.session.user});
    
 
 });
@@ -66,6 +83,113 @@ app.get("/users", function (req, res) {
         }
     });
 });
+
+app.get("/indexitem", function (req, res) {
+    const sql = "SELECT product_no,product_id,name_pro,amount_pro,unit_pro FROM product";
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }           
+ 
+        const numrows = result.length;
+        //if no data
+        if(numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+
+app.get("/userhis", function (req, res) {
+    const sql = "SELECT requis_id,requis_pickup,product_id,name_pro,purpose,requis_quantity,unit_pro FROM requisition INNER JOIN product ON requis_id = product_no";
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }           
+ 
+        const numrows = result.length;
+        //if no data
+        if(numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+
+app.get("/adminreq", function (req, res) {
+    const sql = "SELECT requis_date, requis_id, F_name, L_name, email, requis_status FROM requisition INNER JOIN user ON requis_id = User_id";
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }           
+        const numrows = result.length;
+        //if no data
+        if(numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+
+
+app.get("/inventory", function (req, res) {
+    const sql = "SELECT product_no,product_id,name_pro,amount_pro,unit_pro FROM product";
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }           
+ 
+        const numrows = result.length;
+        //if no data
+        if(numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+
+app.get("/manage", function (req, res) {
+    const sql = "SELECT User_id,F_name,L_name,email,role FROM user";
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }           
+ 
+        const numrows = result.length;
+        //if no data
+        if(numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+
+
 
 
 

@@ -42,6 +42,30 @@ https://templatemo.com/tm-529-ramayana
     <link rel="stylesheet" href="assets/css/templatemo-style.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 
+    <script>
+        $(document).ready(function () {
+          $.ajax({
+            url: "indexitem",
+            method: "GET",
+            dataType: "json",
+            success: function (data) {
+              $("#itemtable6").dataTable({
+                responsive: true,
+                data: data,
+                columns: [
+                  { 'data': 'product_no' },
+                  { 'data': 'product_id' },
+                  { 'data': 'name_pro' },
+                  { 'data': 'amount_pro' },
+                  { 'data': 'unit_pro' },
+                ]
+                
+              })
+            }
+          });
+        });
+      </script>
+
 </head>
 <style>
     .alignleft {
@@ -125,447 +149,19 @@ https://templatemo.com/tm-529-ramayana
 
                 </div>
                 <div class="container-fluid" style="text-align: right;">
-                    <!-- Search Box -->
 
-                    <form method="get" action="#">
-                        <input type="text" name="search" id="search" placeholder="Search..." />
-                    </form>
+                                    <table id="itemtable6" style="width: 100%;">
 
-                </div>
-                <!-- Tables -->
-                <section class="tables">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="default-table" style="text-align: center;">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>ลำดับ</td>
-                                                <td>รหัสวัสดุ</td>
-                                                <td>ชื่อวัสดุ</td>
-                                                <td>จำนวนคงเหลือ</td>
-                                                <td>หน่วยนับ</td>
-                                                <td>ทำรายการ</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>101001</td>
-                                                <td>กรรไกรตัดการดาษ 6”</td>
-                                                <td>8</td>
-                                                <td>อัน</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit1">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit1" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="8" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>101002</td>
-                                                <td>กรรไกรตัดการดาษ 9”</td>
-                                                <td>20</td>
-                                                <td>อัน</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit2">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit2" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="20" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>101003</td>
-                                                <td>กระดาษ POSTIT 2*3”</td>
-                                                <td>3</td>
-                                                <td>เล่ม</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit3">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit3" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="3" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>101004</td>
-                                                <td>กระดาษ POSTIT 3*3”</td>
-                                                <td>6</td>
-                                                <td>เล่ม</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit4">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit4" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="6" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>101005</td>
-                                                <td>กระดาษ Carbon</td>
-                                                <td>24</td>
-                                                <td>กล่อง</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit5">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit5" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="24" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>101006</td>
-                                                <td>กระดาษเครื่องโทรสาร Sharp/FO-57</td>
-                                                <td>6</td>
-                                                <td>ม้วน</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit6">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit6" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="6" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>101007</td>
-                                                <td>กระดาษต่อเนื่อง ขนาด 15”*11” 1ชั้น</td>
-                                                <td>6</td>
-                                                <td>กล่อง</td>
-                                                <td><button type="button" class="btn btn-warning float-right"
-                                                        data-toggle="modal" data-target="#edit7">แก้ไข</button></td>
-                                                <!-- Modal Edit -->
-                                                <div class="modal fade" id="edit7" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="col-12 modal-title  "
-                                                                    id="exampleModalLongTitle">แก้ไขวัสดุ
-                                                                </h2>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body container" style="text-align: left;">
-                                                                <div class="form-group">
-
-                                                                    วันที่<input type="date" class="form-control"
-                                                                        id="txtDate" />
-                                                                    <br>
-                                                                    รหัสวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="idMat" />
-                                                                    <br>
-                                                                    ชื่อวัสดุ
-                                                                    <input type="text" class="form-control"
-                                                                        id="nameMat" />
-                                                                    <br>
-                                                                    จำนวน
-                                                                    <input value="6" type="number" class="form-control"
-                                                                        id="amount" style="width: 200px;" />
-                                                                    <br>
-                                                                    หน่วยนับ
-                                                                    <input style="width: 200px;" type="text"
-                                                                        class="form-control" id="unitCount" />
-                                                                </div>
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success"
-                                                                    data-dismiss="modal">ตกลง</button> &nbsp;
-                                                                <button type="button" class="btn btn-danger "
-                                                                    data-dismiss="modal">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <ul class="table-pagination">
-                                        <li><a href="#">Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
+                                            <thead>
+                                                <tr>
+                                                    <td>ลำดับ</td>
+                                                    <td>รหัสวัสดุ</td>
+                                                    <td>ชื่อวัสดุ</td>
+                                                    <td>จำนวนคงเหลือ</td>
+                                                    <td>หน่วยนับ</td>
+                                                    <td>ทำรายการ</td>
+                                                </tr>
+                                            </thead>
             </div>
         </div>
 
@@ -674,7 +270,7 @@ https://templatemo.com/tm-529-ramayana
                         <br>
                         <div class="col-md-9">
                             <div class="filled-rounded-button">
-                                <a href="indexlog.html">LOGOUT</a>
+                                <button id="btnlogout" onclick="signOut()">Logout</button>
                             </div>
                         </div>
                     </ul>

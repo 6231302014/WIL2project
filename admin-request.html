@@ -7,11 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="local/index.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <title>ระบบแจ้งเบิกวัสดุ</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!--
 Ramayana CSS Template
@@ -19,9 +30,9 @@ https://templatemo.com/tm-529-ramayana
 -->
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/owl.css">
     <link rel="stylesheet" href="bgall.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -35,6 +46,30 @@ https://templatemo.com/tm-529-ramayana
 
 
 </head>
+
+<script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "adminreq",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+          $("#itemtable3").dataTable({
+            data: data,
+            columns: [
+              { 'data': 'requis_date' },
+              { 'data': 'requis_id' },
+              { 'data': 'F_name' },
+              { 'data': 'L_name' },
+              { 'data': 'email' },
+              { 'data': 'requis_status'},
+             
+            ]
+          })
+        }
+      });
+    });
+  </script>
 
 <body class="is-preload">
 
@@ -52,24 +87,22 @@ https://templatemo.com/tm-529-ramayana
 
                 </header>
                 <h1 style="color:white;">คำขอเบิกวัสดุ</h1>
-                <!-- Tables -->
-                <section class="tables">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="default-table" style="text-align: center;">
-                                    <table>
-                                        <tbody>
+              
+                                    <table id="itemtable3" style="width:100%">
+                                        <thead>
                                             <tr>
-                                                <td>ลำดับ</td>
                                                 <td>วันที่</td>
                                                 <td>เลขที่คำขอ</td>
-                                                <td>ชื่อ-นามสกุล</td>
+                                                <td>ชื่อ</td>
+                                                <td>นามสกุล</td>
                                                 <td>ข้อมูลการติดต่อ</td>
                                                 <td>สถานะ</td>
                                                 <td>ข้อมูลเพิ่มเติม</td>
                                             </tr>
-                                            <tr>
+
+                                        </thead>
+                                            
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td>10/12/2020</td>
                                                 <td>113457</td>
@@ -138,26 +171,10 @@ https://templatemo.com/tm-529-ramayana
                                                 <td class="text-success">อนุมัติ</td>
                                                 <td> <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#myModal">รายละเอียดเพิ่มเติม</button></td>
-                                            </tr>
-                                        </tbody>
+                                            </tr> -->
+                                        
                                     </table>
-                                    <ul class="table-pagination">
-                                        <li><a href="#">Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-        </div>
+                                      
 
         <!-- Sidebar -->
         <div id="sidebar">
@@ -225,7 +242,7 @@ https://templatemo.com/tm-529-ramayana
                             </svg>
     
                             &nbsp; หน้าแรก</a></li>
-                    <li><a href="inventory.html"><svg id="baseline-calendar_today-24px"
+                    <li><a href="inven.html"><svg id="baseline-calendar_today-24px"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path id="Path_11391" data-name="Path 11391"
                                     d="M20,3H19V1H17V3H7V1H5V3H4A2.006,2.006,0,0,0,2,5V21a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,20,3Zm0,18H4V8H20Z"
@@ -233,7 +250,7 @@ https://templatemo.com/tm-529-ramayana
                                 <path id="Path_11392" data-name="Path 11392" d="M0,0H24V24H0Z" fill="none" />
                             </svg>
                             &nbsp; คลังวัสดุ</a></li>
-                    <li><a href="------"><svg xmlns="http://www.w3.org/2000/svg" width="20.24"
+                    <li><a href="adminstats.html"><svg xmlns="http://www.w3.org/2000/svg" width="20.24"
                                 height="20.24" viewBox="0 0 20.24 20.24">
                                 <path id="ic_equalizer_24px"
                                     d="M11.59,24.24h5.06V4H11.59ZM4,24.24H9.06V14.12H4ZM19.18,10.325V24.24h5.06V10.325Z"
@@ -305,7 +322,7 @@ https://templatemo.com/tm-529-ramayana
                         <input type="text">
                         <button type="button" class="btn btn-success" data-dismiss="modal"
                             id="btnapprove">อนุมัติ</button>
-
+                         <button type="button" class="btn btn-danger" data-dismiss="modal" id="btndisapp">ไม่อนุมัติ</button>
                     </div>
 
                 </div>
@@ -341,7 +358,7 @@ https://templatemo.com/tm-529-ramayana
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal"
                             id="btnapprove">อนุมัติ</button>
-
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"  id="btndisapp">ไม่อนุมัติ</button>
                     </div>
 
                 </div>
@@ -360,6 +377,15 @@ https://templatemo.com/tm-529-ramayana
                     $("#waiting").toggleClass('text-warning text-success');
 
 
+                });
+                $("#btndisapp").click(function () { 
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ดำเนินการสำเร็จ',
+
+                    })
+                    $("#waiting").text("ไม่อนุมัติ");
+                    $("#waiting").toggleClass('text-warning text-danger');
                 });
 
 
