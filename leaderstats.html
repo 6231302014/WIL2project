@@ -37,6 +37,18 @@
     <title>สถิติการเบิก</title>
 
 </head>
+<style>
+    h1 {
+        font-family: 'Roboto Slab', serif;
+        font-weight: 300;
+        font-size: 3.2em;
+        color: white;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        margin: 0 auto;
+        text-align: left;
+
+    }
+</style>
 
 <body>
 
@@ -60,21 +72,31 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h1 style="color: white;">สถิติการเบิก</h1>
-                                <select id="month">
+                                <select id="month" class="form-select shadow-none" style="width: 170px;">
                                     <option value="select_month">กรุณาเลือกเดือน</option>
                                     <option value="jan">มกราคม</option>
                                     <option value="feb">กุมภาพันธ์</option>
                                     <option value="march">มีนาคม</option>
                                     <option value="april">เมษายน</option>
-                                </select>
-                                <select id="years">
+                                    <option value="may">พฤษภาคม</option>
+                                    <option value="june">มิถุนายน</option>
+                                    <option value="july">กรกฎาคม</option>
+                                    <option value="august">สิงหาคม</option>
+                                    <option value="september">กันยายน</option>
+                                    <option value="october">ตุลาคม</option>
+                                    <option value="november">พฤศจิกายน</option>
+                                    <option value="december">ธันวาคม</option>
+                                    
+                                  </select>
+                                  <br>
+                                  <select id="years" class="form-select shadow-none" style="width: 170px;"> 
                                     <option value="select_year">กรุณาเลือกปี</option>
                                     <option value="2564">2564</option>
                                     <option value="2563">2563</option>
                                     <option value="2562">2562</option>
                                     <option value="2561">2561</option>
                                     <option value="2560">2560</option>
-                                </select>
+                                  </select>
 
 
                             </div>
@@ -115,11 +137,7 @@
                     <div class="container-fluid">
 
                         <div class="container-fluid">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    
-                                </div>
-                            </div>
+                            
 
                             <div class="container-fluid ">
 
@@ -144,7 +162,7 @@
 
                                         </div>
 
-                                        <div class="feed-widget " style="color: white;">
+                                        <!-- <div class="feed-widget " style="color: white;">
                                             <ul class="list-style-none feed-body m-0 p-b-20">
                                                 <li class="feed-item">
                                                     <div></i></div> 101001 กรรไกรตัดกระดาษ 6"
@@ -175,7 +193,86 @@
                                                     15*11 1ชั้น<span class="ms-auto font-12 text-muted">9</span>
                                                 </li>
                                             </ul>
+                                       </div> -->
+
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="default-table" style="text-align: center;">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>ลำดับ</td>
+                                                                    <td>รหัสวัสดุ</td>
+                                                                    <td>ชื่อวัสดุ</td>
+                                                                    <td>จำนวนคงเหลือ</td>
+                                                                    <td>หน่วยนับ</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>101001</td>
+                                                                    <td>กรรไกรตัดการดาษ 6”</td>
+                                                                    <td>8</td>
+                                                                    <td>อัน</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>101002</td>
+                                                                    <td>กรรไกรตัดการดาษ 9”</td>
+                                                                    <td>20</td>
+                                                                    <td>อัน</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>101003</td>
+                                                                    <td>กระดาษ POSTIT 2*3”</td>
+                                                                    <td>3</td>
+                                                                    <td>เล่ม</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4</td>
+                                                                    <td>101004</td>
+                                                                    <td>กระดาษ POSTIT 3*3”</td>
+                                                                    <td>6</td>
+                                                                    <td>เล่ม</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5</td>
+                                                                    <td>101005</td>
+                                                                    <td>กระดาษ Carbon</td>
+                                                                    <td>24</td>
+                                                                    <td>กล่อง</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6</td>
+                                                                    <td>101006</td>
+                                                                    <td>กระดาษเครื่องโทรสาร Sharp/FO-57</td>
+                                                                    <td>6</td>
+                                                                    <td>ม้วน</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7</td>
+                                                                    <td>101007</td>
+                                                                    <td>กระดาษต่อเนื่อง ขนาด 15”*11” 1ชั้น</td>
+                                                                    <td>0</td>
+                                                                    <td>กล่อง</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <ul class="table-pagination">
+                                                            <li><a href="#">Previous</a></li>
+                                                            <li class="active"><a href="#">1</a></li>
+                                                            <li><a href="#">2</a></li>
+                                                            <li><a href="#">...</a></li>
+                                                            <li><a href="#">8</a></li>
+                                                            <li><a href="#">9</a></li>
+                                                            <li><a href="#">Next</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +286,8 @@
 
             </div>
         </div>
+
+
 
         <!-- Sidebar -->
         <div id="sidebar">
