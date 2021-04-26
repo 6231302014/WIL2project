@@ -63,6 +63,14 @@ app.get('/manageuser',checkUser,(req,res) => {
 
 });
 
+app.get('/adminrequest',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/admin-request.html"));
+        // res.render('index',{user: req.session.user});
+   
+
+});
+
+
 app.get("/users", function (req, res) {
     const sql = "SELECT User_id,F_name, L_name, email, role FROM user";
     con.query(sql, function (err, result, fields) {
