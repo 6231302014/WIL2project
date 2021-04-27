@@ -7,6 +7,7 @@ const app = express();
 const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
 const checkUser = require('./checkUser');
+const e = require('express');
 //================= Session Management ================
 app.use(session({
    cookie:{maxAge: 24*60*60*1000, httpOnly:true},
@@ -27,13 +28,6 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // =============== Page routes ==================
-app.get('/',(req,res) => {
-    if(req.session.user){
-        res.redirect('/index');
-    }else{
-        res.render('login');
-    }
-});
 
 app.get('/index',checkUser,(req,res) => {
     res.sendFile(path.join(__dirname, "/index.html"));
@@ -68,6 +62,42 @@ app.get('/adminrequest',checkUser,(req,res) => {
         // res.render('index',{user: req.session.user});
    
 
+});
+
+app.get('/stats',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/adminstats.html"));
+        // res.render('index',{user: req.session.user});
+   
+
+});
+app.get('/adminrecord',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/admin-record.html"));
+        // res.render('index',{user: req.session.user});
+
+});
+app.get('/userrequest',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/request.html"));
+        // res.render('index',{user: req.session.user});
+
+});
+app.get('/userrecord',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/user_history_edit.html"));
+        // res.render('index',{user: req.session.user});
+
+});
+app.get('/leaderstats',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/leaderstats.html"));
+        // res.render('index',{user: req.session.user});
+
+});
+
+app.get('/', (req,res) => {
+    if(req.session.user){
+            res.redirect('/index');
+    }
+    else{
+        res.render('login');
+    }
 });
 
 
@@ -225,15 +255,22 @@ app.post('/verifyUser',(req,res) =>{
     return  res.status(500).send('Not a member');
     }
     // check whether the use is active
-   if(result[0].role ==0){
+   if(result[0].role == 0){
     return  res.status(500).send('Inactive member');
    }
    // console.log(email);
 
    //save user data to session 
    req.session.user = {'username': payload.name,'User_id': result[0].User_id,'role': result[0].role};  
-   res.send('/index');
-    });
+   if(result[0].role == 2){
+    res.send('/index');
+   }else if(result[0].role == 1){
+    res.send('/adminrequest')
+   }else if(result[0].role == 3){
+       res.send('/leaderstats')
+   }
+     });
+ 
    }).catch((err)=> {
        console.log(err);
        res.status(400).send('Token is invalid');
