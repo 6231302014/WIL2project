@@ -8,11 +8,21 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="local/logout.js"></script>
 
   <title>ประวัติการเบิก</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./bgall.css">
 
   <!--
@@ -21,9 +31,35 @@ https://templatemo.com/tm-529-ramayana
 -->
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-style.css">
-  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="css/fontawesome.css">
+  <link rel="stylesheet" href="css/templatemo-style.css">
+  <link rel="stylesheet" href="css/owl.css">
+
+  
+  <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "userhis",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+          $("#itemtable2").dataTable({
+            responsive: true,
+            data: data,
+            columns: [
+              { 'data': 'requis_id' },
+              { 'data': 'requis_pickup' },
+              { 'data': 'product_id' },
+              { 'data': 'name_pro' },
+              { 'data': 'purpose' },
+              { 'data': 'requis_quantity' },
+              { 'data': 'unit_pro' },
+            ]
+          })
+        }
+      });
+    });
+  </script>
 
 </head>
 
@@ -48,125 +84,42 @@ https://templatemo.com/tm-529-ramayana
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
-                <h1 style="color: white;">ประวัติการเบิก</h1>
+                <h1>ประวัติการเบิก</h1>
                 <select  id="month">
-                  <option value="select_month">กรุณาเลือกเดือน</option>
+                  <option id="select_month">กรุณาเลือกเดือน</option>
                   <option value="jan">มกราคม</option>
                   <option value="feb">กุมภาพันธ์</option>
                   <option value="mar">มีนาคม</option>
-                  <option value="April">เมษายน</option>
+                  <option value="april">เมษายน</option>
                 </select>
-                <select  id="year">
-                  <option value="select_year">กรุณาเลือกปี</option>
+                <select  id="years">
+                  <option id="select_years">กรุณาเลือกปี</option>
                   <option value="2564">2564</option>
-                  <option value="2564">2563</option>
-                  <option value="2564">2562</option>
-                  <option value="2564">2561</option>
-                  <option value="2564">2560</option>
+                  <option value="2563">2563</option>
+                  <option value="2562">2562</option>
+                  <option value="2561">2561</option>
+                  <option value="2560">2560</option>
                 </select>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Tables -->
-        <section class="tables">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="default-table" style="text-align: center;">
-                  <table>
-                    <tbody>
+                  <table id="itemtable2" style="width:100%">
+                    <thead>
                       <tr>
-                        <td>ลำดับ</td>
+                        <td>เลขที่การเบิก</td>
                         <td>วัน/เดือน/ปี</td>
                         <td>รหัสวัสดุ</td>
                         <td>ชื่อวัสดุ</td>
-                        <td>ชื่อ - นามสกุล</td>
+                        <td>หมายเหตุ</td>
                         <td>จำนวน</td>
                         <td>หน่วยนับ</td>
-
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>30/1/2564</td>
-                        <td>101001</td>
-                        <td>กรรไกรตัดการดาษ 6”</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>4</td>
-                        <td>อัน</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>26/1/2564</td>
-                        <td>101002</td>
-                        <td>กรรไกรตัดการดาษ 9”</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>10</td>
-                        <td>อัน</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>20/1/2564</td>
-                        <td>101003</td>
-                        <td>กระดาษ POSTIT 2*3”</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>5</td>
-                        <td>เล่ม</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>16/1/2564</td>
-                        <td>101004</td>
-                        <td>กระดาษ POSTIT 3*3”</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>8</td>
-                        <td>เล่ม</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>10/1/2564</td>
-                        <td>101005</td>
-                        <td>กระดาษ Carbon</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>15</td>
-                        <td>กล่อง</td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>5/1/2564</td>
-                        <td>101006</td>
-                        <td>กระดาษเครื่องโทรสาร Sharp/FO-57</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>5</td>
-                        <td>ม้วน</td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>1/1/2564</td>
-                        <td>101007</td>
-                        <td>กระดาษต่อเนื่อง ขนาด 15”*11” 1ชั้น</td>
-                        <td>AAAAA AAAAA</td>
-                        <td>9</td>
-                        <td>กล่อง</td>
-                      </tr>
-                    </tbody>
+                    </thead>
+                     
                   </table>
-                  <ul class="table-pagination">
-                    <li><a href="#">Previous</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">...</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">Next</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+                 
       </div>
     </div>
 
@@ -237,8 +190,8 @@ https://templatemo.com/tm-529-ramayana
                     transform="translate(-3 -3)" fill="#fff" />
                 </svg>
                 &nbsp; หน้าแรก</a></li>
-            <li><a href="request.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22"
-                  viewBox="0 0 20 22">
+            <li><a href="request.html"><svg id="baseline-calendar_today-24px" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" viewBox="0 0 24 24">
                   <path id="Path_11391" data-name="Path 11391"
                     d="M20,3H19V1H17V3H7V1H5V3H4A2.006,2.006,0,0,0,2,5V21a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,20,3Zm0,18H4V8H20Z"
                     transform="translate(-2 -1)" fill="#fff" />
@@ -268,7 +221,7 @@ https://templatemo.com/tm-529-ramayana
 
           <div class="col-md-9">
             <div class="filled-rounded-button">
-              <a href="indexlog.html">LOGOUT</a>
+              <button id="btnlogout" onclick="signOut()">Logout</button>
             </div>
           </div>
 
@@ -278,14 +231,14 @@ https://templatemo.com/tm-529-ramayana
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="jquery/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
 
-  <script src="assets/js/browser.min.js"></script>
-  <script src="assets/js/breakpoints.min.js"></script>
-  <script src="assets/js/transition.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="js/browser.min.js"></script>
+  <script src="js/breakpoints.min.js"></script>
+  <script src="js/transition.js"></script>
+  <script src="js/owl-carousel.js"></script>
+  <script src="js/custom.js"></script>
 </body>
 
 

@@ -7,11 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="local/logout.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="local/index.js"></script>
     <title>ระบบแจ้งเบิกวัสดุ</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!--
 Ramayana CSS Template
@@ -19,9 +31,10 @@ https://templatemo.com/tm-529-ramayana
 -->
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/owl.css">
+    <link rel="stylesheet" href="bgall.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
@@ -34,6 +47,30 @@ https://templatemo.com/tm-529-ramayana
 
 
 </head>
+
+<script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "adminreq",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+          $("#itemtable3").dataTable({
+            data: data,
+            columns: [
+              { 'data': 'requis_date' },
+              { 'data': 'requis_id' },
+              { 'data': 'F_name' },
+              { 'data': 'L_name' },
+              { 'data': 'email' },
+              { 'data': 'requis_status'},
+             
+            ]
+          })
+        }
+      });
+    });
+  </script>
 
 <body class="is-preload">
 
@@ -50,34 +87,23 @@ https://templatemo.com/tm-529-ramayana
                     </div>
 
                 </header>
-                <div class="page-heading">
-                <h1 style="color:white">คำขอเบิกวัสดุ</h1>
-                </div>
-                <!-- Search Box -->
-                <section id="search" class="alt" style="text-align: right;">
-                    <form method="get" action="#">
-                        <input type="text" name="search" id="search" placeholder="Search..." />
-                    </form>
-                </section>
-
-                <!-- Tables -->
-                <section class="tables">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="default-table" style="text-align: center;">
-                                    <table>
-                                        <tbody>
+                <h1 style="color:white;">คำขอเบิกวัสดุ</h1>
+              
+                                    <table id="itemtable3" style="width:100%">
+                                        <thead>
                                             <tr>
-                                                <td>ลำดับ</td>
                                                 <td>วันที่</td>
                                                 <td>เลขที่คำขอ</td>
-                                                <td>ชื่อ-นามสกุล</td>
+                                                <td>ชื่อ</td>
+                                                <td>นามสกุล</td>
                                                 <td>ข้อมูลการติดต่อ</td>
                                                 <td>สถานะ</td>
                                                 <td>ข้อมูลเพิ่มเติม</td>
                                             </tr>
-                                            <tr>
+
+                                        </thead>
+                                            
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td>10/12/2020</td>
                                                 <td>113457</td>
@@ -146,34 +172,18 @@ https://templatemo.com/tm-529-ramayana
                                                 <td class="text-success">อนุมัติ</td>
                                                 <td> <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#myModal">รายละเอียดเพิ่มเติม</button></td>
-                                            </tr>
-                                        </tbody>
+                                            </tr> -->
+                                        
                                     </table>
-                                    <ul class="table-pagination">
-                                        <li><a href="#">Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-        </div>
+                                      
 
         <!-- Sidebar -->
         <div id="sidebar">
-
+                
             <div class="inner" style="background-color: #174A84;">
                 <center>
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="158"
-                        height="158" viewBox="0 0 158 158">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="158" height="158" viewBox="0 0 158 158">
                         <defs>
                             <filter id="it-logo120x120" x="0" y="0" width="158" height="158"
                                 filterUnits="userSpaceOnUse">
@@ -184,7 +194,7 @@ https://templatemo.com/tm-529-ramayana
                                 <feComposite in="SourceGraphic" />
                             </filter>
                         </defs>
-
+    
                         <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#it-logo120x120)">
                             <image id="it-logo120x120-2" data-name="it-logo120x120" width="140" height="140"
                                 transform="translate(9 6)"
@@ -194,107 +204,104 @@ https://templatemo.com/tm-529-ramayana
                 </center>
                 <div>
                     <center>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="225"
-                            height="88" viewBox="0 0 225 88">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="225" height="88" viewBox="0 0 225 88">
                             <defs>
-                                <filter id="M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_" x="31" y="2" width="154"
-                                    height="86" filterUnits="userSpaceOnUse">
-                                    <feOffset dy="3" input="SourceAlpha" />
-                                    <feGaussianBlur stdDeviation="3" result="blur" />
-                                    <feFlood flood-opacity="0.678" />
-                                    <feComposite operator="in" in2="blur" />
-                                    <feComposite in="SourceGraphic" />
-                                </filter>
+                              <filter id="M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_" x="31" y="2" width="154" height="86" filterUnits="userSpaceOnUse">
+                                <feOffset dy="3" input="SourceAlpha"/>
+                                <feGaussianBlur stdDeviation="3" result="blur"/>
+                                <feFlood flood-opacity="0.678"/>
+                                <feComposite operator="in" in2="blur"/>
+                                <feComposite in="SourceGraphic"/>
+                              </filter>
                             </defs>
-                            <rect id="Rectangle_549" data-name="Rectangle 549" width="225" height="62" fill="#aaffbe" />
+                            <rect id="Rectangle_549" data-name="Rectangle 549" width="225" height="62" fill="#aaffbe"/>
                             <g id="Group_2846" data-name="Group 2846" transform="translate(27 -18)">
-                                <g transform="matrix(1, 0, 0, 1, -27, 18)"
-                                    filter="url(#M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_)">
-                                    <text id="M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_2" data-name="M A E F A H L U A N G
-                      U N I V E R S I T Y 
-                      " transform="translate(108 27)" stroke="rgba(255,255,255,0.56)" stroke-linejoin="round"
-                                        stroke-width="1" font-size="18" font-family="Impact">
-                                        <tspan x="-66.524" y="0">M A E F A H L U A N G</tspan>
-                                        <tspan x="-57.204" y="22">U N I V E R S I T Y </tspan>
-                                        <tspan x="0" y="44"></tspan>
-                                    </text>
-                                </g>
+                              <g transform="matrix(1, 0, 0, 1, -27, 18)" filter="url(#M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_)">
+                                <text id="M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_2" data-name="M A E F A H L U A N G
+                          U N I V E R S I T Y 
+                          " transform="translate(108 27)" stroke="rgba(255,255,255,0.56)" stroke-linejoin="round" stroke-width="1" font-size="18" font-family="Impact"><tspan x="-66.524" y="0">M A E F A H L U A N G</tspan><tspan x="-57.204" y="22">U N I V E R S I T Y </tspan><tspan x="0" y="44"></tspan></text>
+                              </g>
                             </g>
-                        </svg>
+                          </svg>
+                          
+    
+    
+    
                     </center>
                 </div>
-
-                <!-- Menu -->
-                <nav id="menu">
-                    <ul>
-                        <li><a href="admin-request.html"><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" viewBox="0 0 24 24">
-                                    <path id="Path_11385" data-name="Path 11385" d="M0,0H24V24H0Z" fill="none" />
-                                    <path id="Path_11386" data-name="Path 11386"
-                                        d="M19,5V7H15V5h4M9,5v6H5V5H9m10,8v6H15V13h4M9,17v2H5V17H9M21,3H13V9h8ZM11,3H3V13h8Zm10,8H13V21h8ZM11,15H3v6h8Z"
-                                        fill="#fff" />
-                                </svg>
-
-                                &nbsp; หน้าแรก</a></li>
-                        <li><a href="inven.html"><svg id="baseline-calendar_today-24px"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path id="Path_11391" data-name="Path 11391"
-                                        d="M20,3H19V1H17V3H7V1H5V3H4A2.006,2.006,0,0,0,2,5V21a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,20,3Zm0,18H4V8H20Z"
-                                        fill="#fff" />
-                                    <path id="Path_11392" data-name="Path 11392" d="M0,0H24V24H0Z" fill="none" />
-                                </svg>
-                                &nbsp; คลังวัสดุ</a></li>
-                        <li><a href="สถิติการเบิก"><svg xmlns="http://www.w3.org/2000/svg" width="20.24" height="20.24"
-                                    viewBox="0 0 20.24 20.24">
-                                    <path id="ic_equalizer_24px"
-                                        d="M11.59,24.24h5.06V4H11.59ZM4,24.24H9.06V14.12H4ZM19.18,10.325V24.24h5.06V10.325Z"
-                                        transform="translate(-4 -4)" fill="#fff" />
-                                </svg>
-                                &nbsp; สถิติการเบิก</a> </li>
-                        <li><a href="ประวัติการเบิก"><svg xmlns="http://www.w3.org/2000/svg" width="23.443"
-                                    height="20.094" viewBox="0 0 23.443 20.094">
-                                    <path id="ic_restore_24px"
-                                        d="M14.4,3A10.048,10.048,0,0,0,4.349,13.047H1l4.342,4.342.078.156,4.51-4.5H6.582a7.852,7.852,0,1,1,2.3,5.515L7.3,20.147A10.044,10.044,0,1,0,14.4,3ZM13.28,8.582v5.582L18.057,17l.8-1.351-3.907-2.322V8.582Z"
-                                        transform="translate(-1 -3)" fill="#fff" />
-                                </svg>
-                                &nbsp; ประวัติการเบิก</a> </li>
-                        
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-md-9">
-                            <div class="filled-rounded-button">
-                                <a href="indexlog.html">LOGOUT</a>
-                            </div>
-                        </div>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
+    
+               <!-- Menu -->
+              <!-- Menu -->
+              <nav id="menu">
+                <ul>
+                    <li><a href="admin-request.html"><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24">
+                                <path id="Path_11385" data-name="Path 11385" d="M0,0H24V24H0Z" fill="none" />
+                                <path id="Path_11386" data-name="Path 11386"
+                                    d="M19,5V7H15V5h4M9,5v6H5V5H9m10,8v6H15V13h4M9,17v2H5V17H9M21,3H13V9h8ZM11,3H3V13h8Zm10,8H13V21h8ZM11,15H3v6h8Z"
+                                    fill="#fff" />
+                            </svg>
+    
+                            &nbsp; หน้าแรก</a></li>
+                    <li><a href="inven.html"><svg id="baseline-calendar_today-24px"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path id="Path_11391" data-name="Path 11391"
+                                    d="M20,3H19V1H17V3H7V1H5V3H4A2.006,2.006,0,0,0,2,5V21a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,20,3Zm0,18H4V8H20Z"
+                                    fill="#fff" />
+                                <path id="Path_11392" data-name="Path 11392" d="M0,0H24V24H0Z" fill="none" />
+                            </svg>
+                            &nbsp; คลังวัสดุ</a></li>
+                    <li><a href="adminstats.html"><svg xmlns="http://www.w3.org/2000/svg" width="20.24"
+                                height="20.24" viewBox="0 0 20.24 20.24">
+                                <path id="ic_equalizer_24px"
+                                    d="M11.59,24.24h5.06V4H11.59ZM4,24.24H9.06V14.12H4ZM19.18,10.325V24.24h5.06V10.325Z"
+                                    transform="translate(-4 -4)" fill="#fff" />
+                            </svg>
+                            &nbsp; สถิติการเบิก</a> </li>
+                    <li><a href="admin-record.html"><svg xmlns="http://www.w3.org/2000/svg" width="23.443" height="20.094"
+                                viewBox="0 0 23.443 20.094">
+                                <path id="ic_restore_24px"
+                                    d="M14.4,3A10.048,10.048,0,0,0,4.349,13.047H1l4.342,4.342.078.156,4.51-4.5H6.582a7.852,7.852,0,1,1,2.3,5.515L7.3,20.147A10.044,10.044,0,1,0,14.4,3ZM13.28,8.582v5.582L18.057,17l.8-1.351-3.907-2.322V8.582Z"
+                                    transform="translate(-1 -3)" fill="#fff" />
+                            </svg>
+                            &nbsp; ประวัติการเบิก</a> </li>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="col-md-9">
+                  <div class="filled-rounded-button">
+                    <a href="indexlog.html">LOGOUT</a>
+                  </div>
+                </div>
+    
+    
+              </ul>
+            </nav>
         <!-- The Modal1 -->
-        <div class="modal" id="myModal">
+        <!-- <div class="modal" id="myModal">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content"> -->
 
 
                     <!-- Modal Header -->
-                    <div class="modal-header">
+                    <!-- <div class="modal-header">
                         <h3 class="modal-title">รายละเอียดเพิ่มเติม</h3>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+                    </div> -->
 
                     <!-- Modal body -->
-                    <div class="modal-body">
+                    <!-- <div class="modal-body">
                         <h4>รายการ</h4>
                         <div id="textmenu">
                             <li>กรรไกรตัดกระดาษ 6" 6 เล่ม <input type="number" id="list1" value="0"
@@ -308,34 +315,34 @@ https://templatemo.com/tm-529-ramayana
                         <p></p>
                         <h4>วัตถุประสงค์</h4>
                         <li>นำไปทำโครงงาน ต้องการด่วนๆ</li>
-                    </div>
+                    </div> -->
 
                     <!-- Modal footer -->
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                         <li>หมายเหตุ</li>
                         <input type="text">
                         <button type="button" class="btn btn-success" data-dismiss="modal"
                             id="btnapprove">อนุมัติ</button>
-
+                         <button type="button" class="btn btn-danger" data-dismiss="modal" id="btndisapp">ไม่อนุมัติ</button>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- The Modal2 -->
-        <div class="modal" id="myModal2">
+        <!-- <div class="modal" id="myModal2">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content"> -->
 
 
                     <!-- Modal Header -->
-                    <div class="modal-header">
+                    <!-- <div class="modal-header">
                         <h3 class="modal-title">รายละเอียดเพิ่มเติม</h3>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+                    </div> -->
 
                     <!-- Modal body -->
-                    <div class="modal-body">
+                    <!-- <div class="modal-body">
                         <h4>รายการ</h4>
                         <div id="textmenu">
                             <li>แปลงลบกระดาน 2 อัน <input type="number" id="list1" value="2" style="width: 40px;"></li>
@@ -346,18 +353,18 @@ https://templatemo.com/tm-529-ramayana
                         <p></p>
                         <h4>วัตถุประสงค์</h4>
                         <li>ใช้ทำสื่อการสอน</li>
-                    </div>
+                    </div> -->
 
                     <!-- Modal footer -->
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal"
                             id="btnapprove">อนุมัติ</button>
-
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"  id="btndisapp">ไม่อนุมัติ</button>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Scripts -->
         <script>
             $(document).ready(function () {
@@ -371,6 +378,15 @@ https://templatemo.com/tm-529-ramayana
                     $("#waiting").toggleClass('text-warning text-success');
 
 
+                });
+                $("#btndisapp").click(function () { 
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ดำเนินการสำเร็จ',
+
+                    })
+                    $("#waiting").text("ไม่อนุมัติ");
+                    $("#waiting").toggleClass('text-warning text-danger');
                 });
 
 
