@@ -6,13 +6,15 @@
 	<title>ระบบเบิกจ่ายวัสดุ</title>
 
 	<!-- Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
+		rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Custom Stylesheet -->
 	<link rel="stylesheet" href="css/style.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -21,33 +23,54 @@
 			<div class="box-header">
 				<br>
 				<img src="./images/it-logo120x120.png">
-				<h2>ระบบเบิกจ่ายวัสดุ <p>School of Information of Technology</p> </h2>
+				<h2>ระบบเบิกจ่ายวัสดุ <p>School of Information of Technology</p>
+				</h2>
 			</div>
-			<input type="text" id="email" placeholder="E - mail">
-			<br/>
-			<input type="password" id="password" placeholder="Password">
-			<br/>
-			<button type="button">Log In</button>
-			<br/>
+			
+			<center>
+			<div id="my-signin2"></div>
+			
+				<script>
+					function onSuccess(googleUser) {
+						console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+					}
+					function onFailure(error) {
+						console.log(error);
+					}
+					function renderButton() {
+						gapi.signin2.render('my-signin2', {
+							'scope': 'profile email',
+							'width': 240,
+							'height': 50,
+							'longtitle': true,
+							'theme': 'dark',
+							'onsuccess': onSuccess,
+							'onfailure': onFailure
+						});
+					}
+				</script>
+				<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+			</center>
+			<br />
 		</div>
 	</div>
 </body>
 
 <script>
 	$(document).ready(function () {
-    	$('#logo').addClass('animated fadeInDown');
-    	$("input:text:visible:first").focus();
+		$('#logo').addClass('animated fadeInDown');
+		$("input:text:visible:first").focus();
 	});
-	$('#username').focus(function() {
+	$('#username').focus(function () {
 		$('label[for="username"]').addClass('selected');
 	});
-	$('#username').blur(function() {
+	$('#username').blur(function () {
 		$('label[for="username"]').removeClass('selected');
 	});
-	$('#password').focus(function() {
+	$('#password').focus(function () {
 		$('label[for="password"]').addClass('selected');
 	});
-	$('#password').blur(function() {
+	$('#password').blur(function () {
 		$('label[for="password"]').removeClass('selected');
 	});
 </script>
