@@ -3,18 +3,20 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>ระบบเบิกจ่ายวัสดุ</title>
+	<title>Login</title>
 
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
 		rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="css/animate.css">
-	<!-- Custom Stylesheet -->
+	<!-- Custom Stylesheet -->	
 	<link rel="stylesheet" href="css/style.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -26,53 +28,47 @@
 				<h2>ระบบเบิกจ่ายวัสดุ <p>School of Information of Technology</p>
 				</h2>
 			</div>
-			
+			<br>
 			<center>
-			<div id="my-signin2"></div>
-			
-				<script>
-					function onSuccess(googleUser) {
-						console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-					}
-					function onFailure(error) {
-						console.log(error);
-					}
-					function renderButton() {
-						gapi.signin2.render('my-signin2', {
-							'scope': 'profile email',
-							'width': 240,
-							'height': 50,
-							'longtitle': true,
-							'theme': 'dark',
-							'onsuccess': onSuccess,
-							'onfailure': onFailure
-						});
-					}
-				</script>
-				<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+				<html>
+
+				<head>
+					<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+				</head>
+
+				<body>
+					<div id="my-signin2"></div>
+					<script>
+						function onSuccess(googleUser) {
+							console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+						}
+						function onFailure(error) {
+							console.log(error);
+						}
+						function renderButton () {
+							gapi.signin2.render('my-signin2', {
+								'scope': 'profile email',
+								'width': 240,	
+								'height': 50,
+								'longtitle': true,
+								'theme': 'dark',
+								'onsuccess': onSuccess,
+								'onfailure': onFailure
+								
+							});
+						}
+					</script>
+
+					<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+				</body>
+
+				</html>
 			</center>
-			<br />
+			
 		</div>
 	</div>
 </body>
-
 <script>
-	$(document).ready(function () {
-		$('#logo').addClass('animated fadeInDown');
-		$("input:text:visible:first").focus();
-	});
-	$('#username').focus(function () {
-		$('label[for="username"]').addClass('selected');
-	});
-	$('#username').blur(function () {
-		$('label[for="username"]').removeClass('selected');
-	});
-	$('#password').focus(function () {
-		$('label[for="password"]').addClass('selected');
-	});
-	$('#password').blur(function () {
-		$('label[for="password"]').removeClass('selected');
-	});
 </script>
 
 </html>

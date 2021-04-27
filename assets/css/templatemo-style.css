@@ -1,9 +1,6 @@
 /*
-
 Ramayana CSS Template
-
 https://templatemo.com/tm-529-ramayana
-
 */
 
 
@@ -1038,7 +1035,11 @@ section.buttons .container-fluid {
         font-size: 24px;
     } */
     #sidebar.inactive {
+<<<<<<< HEAD
         margin-left: -150px;
+=======
+        margin-left: 0px;
+>>>>>>> 5a85455ed72184f9ac7ff779eec03c90f3bbd8fe
     }
     #sidebar > .inner > #search  {
 	    width: 380px;
@@ -1204,7 +1205,11 @@ section.buttons .container-fluid {
     display: -ms-flex;
     display: flex;
     position: relative;
+<<<<<<< HEAD
     background-color: #174A84;
+=======
+    background-color: #174a84;
+>>>>>>> 5a85455ed72184f9ac7ff779eec03c90f3bbd8fe
     margin: -100px -100px 100px -100px;
 }
 
@@ -1311,6 +1316,7 @@ section.buttons .container-fluid {
     position: absolute;
     right: 0;
 }
+
 
 #menu ul a.opener:hover:before,
 #menu ul span.opener:hover:before {

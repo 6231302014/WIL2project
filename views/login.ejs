@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ระบบเบิกจ่ายวัสดุ</title>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
+        rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/animate.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="local/login.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="login-box animated fadeInUp">
+            <div class="box-header">
+                <br>
+                <img src="it-logo120x120.png">
+                <h2>ระบบเบิกจ่ายวัสดุ <p>School of Information of Technology</p>
+                </h2>
+                <center>
+                    <div id="my-signin2"></div>
+                    <script>
+                        $(document).ready(function () {
+                            $("#my-signin2").click(function () {
+                              login();
+                            });
+                        });
+    
+                        function onSuccess(googleUser) {
+                            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                        }
+                        function onFailure(error) {
+                            console.log(error);
+                        }
+                        function renderButton() {
+                            gapi.signin2.render('my-signin2', {
+                                'scope': 'profile email',
+                                'width': 240,
+                                'height': 50,
+                                'longtitle': true,
+                                'theme': 'dark',
+                                'onsuccess': onSuccess,
+                                'onfailure': onFailure
+                            });
+                        }
+                    </script>
+                </center>
+             
+
+                <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</body>
+
+<script>
+
+</script>
+
+</html>
