@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.6.1/sweetalert2.min.css">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -17,28 +21,87 @@
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.6.1/sweetalert2.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/9.0.1/highcharts.js"></script>
-
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="local/logout.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
   <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
   <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <link rel="stylesheet" href="bgall.css">
+
   <title>สถิติการเบิก</title>
 
 
+
+  <!--
+Ramayana CSS Template
+https://templatemo.com/tm-529-ramayana
+-->
+
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-style.css">
-  <link rel="stylesheet" href="assets/css/owl.css">
-  <link rel="stylesheet" href="./css2/style.min.css">
-  <link rel="stylesheet" href="bgall.css">
+  <link rel="stylesheet" href="css/fontawesome.css">
+  <link rel="stylesheet" href="css/templatemo-style.css">
+  <link rel="stylesheet" href="css/owl.css">
+
+  <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "adminreq",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {
+          $("#itemtable3").dataTable({
+            data: data,
+            columns: [
+              { 'data': 'requis_date' },
+              { 'data': 'requis_id' },
+              { 'data': 'F_name' },
+              { 'data': 'L_name' },
+              { 'data': 'email' },
+              { 'data': 'requis_status' },
+
+            ]
+          })
+
+
+
+
+          $("#menuadmin1").click(function () {
+            window.location.replace("/adminrequest");
+
+          });
+          $("#menuadmin2").click(function () {
+            window.location.replace("/inven");
+
+          });
+          $("#menuadmin3").click(function () {
+            window.location.replace("/stats");
+
+          });
+          $("#menuadmin4").click(function () {
+            window.location.replace("/adminrecord");
+
+          });
+
+
+
+
+        }
+      });
+    });
+  </script>
+
 
 </head>
 
-<body>
+<body class="is-preload" style="background-color: whitesmoke">
 
   <!-- Wrapper -->
   <div id="wrapper">
@@ -46,27 +109,49 @@
     <!-- Main -->
     <div id="main">
       <div class="inner">
-
         <!-- Header -->
         <header id="header">
           <div class="logo">
-            <a href="index.html">School of IT</a>
+            <a>School of IT</a>
           </div>
+
         </header>
+
+        <div>
+          <div>
+              <h1>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                      class="fa fa-user-circle"></i></h1>
+          </div>
+          <div style="float: right;">
+              <span>Panuwat Duangkham</span>
+          </div>
+
+      </div>
+      <br>
+
+
+
+        <div style="clear: both;"></div>
+
 
         <!-- Page Heading -->
         <div class="page-heading">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
-                <h1 style="color: white;">สถิติการเบิก</h1>
+                <h1 style="color: black">สถิติการเบิก</h1>
                 <select id="month">
                   <option value="select_month">กรุณาเลือกเดือน</option>
                   <option value="jan">มกราคม</option>
                   <option value="feb">กุมภาพันธ์</option>
                   <option value="march">มีนาคม</option>
                   <option value="april">เมษายน</option>
-                </select>
+                </select>&nbsp;&nbsp;
                 <select id="years">
                   <option value="select_year">กรุณาเลือกปี</option>
                   <option value="2564">2564</option>
@@ -76,20 +161,16 @@
                   <option value="2560">2560</option>
                 </select>
 
-                <!-- Search Box -->
-                <section id="search" class="alt" style="text-align: right;">
-                  <form method="get" action="#">
-                    <input type="text" name="search" id="search" placeholder="Search..." />
-                  </form>
-                </section>
-
 
               </div>
             </div>
           </div>
         </div>
         <hr>
+
+
         <div id="chartContainer" style="height: 300px; width: 80%;"></div>
+
         <script>
           var options = {
             title: {
@@ -115,28 +196,24 @@
           $("#chartContainer").CanvasJSChart(options);
 
         </script>
-        <br>
-        <hr>
+
+
         <!-- Simple Post -->
         <section class="simple-post">
           <div class="container-fluid">
 
             <div class="container-fluid">
-              <div class="col-md-8">
-                <div class="card">
-                  
-                </div>
-              </div>
+              <hr>
 
               <div class="container-fluid ">
 
 
                 <div class="container-fluid">
-                  <div class="container-fluid"><br>
-                    <h4 class="card-title" style="color: white;">รายการวัสดุ</h4><br>
+                  <div class="container-fluid">
+                    <h4 class="card-title" style="color: black">รายการวัสดุ</h4><br>
                     <div class="ms-auto">
                       <div class="dl " style="width: 170px;">
-                        <select class="form-select shadow-none" style="color: black;">
+                        <select class="form-select shadow-none">
                           <option value="0">รายการวัสดุทั้งหมด</option>
                           <option value="1" selected>วัสดุสำนักงาน</option>
                           <option value="2">วัสดุไฟฟ้าวิทยุ</option>
@@ -144,43 +221,13 @@
                           <option value="4">วัสดุงานบ้านงานครัว</option>
                           <option value="5">วัสดุเครื่องแต่งกาย</option>
                           <option value="6">วัสดุของที่ระลึก</option>
-                        </select><br>
+                        </select>
 
                       </div>
 
 
                     </div>
 
-                    <div class="feed-widget " style="color: white;">
-                      <ul class="list-style-none feed-body m-0 p-b-20">
-                        <li class="feed-item">
-                          <div></i></div> 101001 กรรไกรตัดกระดาษ 6"
-                          <span class="ms-auto font-12 text-muted " >8</span>
-                        </li>
-                        <li class="feed-item">
-                          <div></i></div> 101002 กรรไกรตัดกระดาษ 9"
-                          <span class="ms-auto font-12 text-muted">20</span>
-                        </li>
-                        <li class="feed-item">
-                          <div></i></div> 101003 กระดาษ POSTIT
-                          2*3"<span class="ms-auto font-12 text-muted">3</span>
-                        </li>
-                        <li class="feed-item">
-                          <div></i></div> 101004 กระดาษ POSTIT 3*3"<span class="ms-auto font-12 text-muted">6</span>
-                        </li>
-                        <li class="feed-item">
-                          <div></i></div> 101005 กระดาษ Carbon<span class="ms-auto font-12 text-muted">24</span>
-                        </li>
-                        <li class="feed-item">
-                          <div></i></div> 101006 กระดาษเครื่องโทรสาร
-                          Sharp/FO-57<span class="ms-auto font-12 text-muted">6</span>
-                        </li>
-                        <li class="feed-item">
-                          <div></i></div> 101007 กระดาษต่อเนื่อง ขนาด
-                          15*11 1ชั้น<span class="ms-auto font-12 text-muted">9</span>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -188,6 +235,73 @@
 
           </div>
         </section>
+
+
+
+
+        <!-- 
+                <div id="textbox">
+                    <h1 class="alignleft" style="color: white">จัดการผู้ใช้</h1>
+                    <button type="button" class="btn btn-success float-right" data-toggle="modal"
+                        data-target="#addUser">เพิ่มวัสดุ</button>
+                </div>
+                <div style="clear: both;"></div> -->
+
+
+
+        <!-- Modal -->
+        <!-- <div class="modal fade" id="addUser" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header ">
+                                <h2 class="col-12 modal-title text-center " id="exampleModalLongTitle">เพิ่มวัสดุ
+                                </h2>
+
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    วันที่
+                                    <input type="date" class="form-control" id="add_date" />
+                                    รหัสวัสดุ
+                                    <input type="text" class="form-control" id="add_id" />
+                                    ชื่อวัสดุ
+                                    <input type="text" class="form-control" id="add_name" />
+                                    จำนวน
+                                    <input type="number" class="form-control" id="add_amount" />
+                                    หน่วยนับ
+                                    <input type="text" class="form-control" id="add_count" />
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div> -->
+
+
+        <!-- <table id="itemtable3" style="width:100%">
+                    <thead>
+                        <tr>
+                            <td>วันที่</td>
+                            <td>เลขที่คำขอ</td>
+                            <td>ชื่อ</td>
+                            <td>นามสกุล</td>
+                            <td>ข้อมูลการติดต่อ</td>
+                            <td>สถานะ</td>
+                            <td>ข้อมูลเพิ่มเติม</td>
+                        </tr>
+
+                    </thead>
+
+
+                </table> -->
 
 
 
@@ -237,8 +351,8 @@
               <g id="Group_2846" data-name="Group 2846" transform="translate(27 -18)">
                 <g transform="matrix(1, 0, 0, 1, -27, 18)" filter="url(#M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_)">
                   <text id="M_A_E_F_A_H_L_U_A_N_G_U_N_I_V_E_R_S_I_T_Y_2" data-name="M A E F A H L U A N G
-                    U N I V E R S I T Y 
-                    " transform="translate(108 27)" stroke="rgba(255,255,255,0.56)" stroke-linejoin="round"
+                          U N I V E R S I T Y 
+                          " transform="translate(108 27)" stroke="rgba(255,255,255,0.56)" stroke-linejoin="round"
                     stroke-width="1" font-size="18" font-family="Impact">
                     <tspan x="-66.524" y="0">M A E F A H L U A N G</tspan>
                     <tspan x="-57.204" y="22">U N I V E R S I T Y </tspan>
@@ -247,17 +361,14 @@
                 </g>
               </g>
             </svg>
-
-
-
-
           </center>
         </div>
 
         <!-- Menu -->
         <nav id="menu">
           <ul>
-            <li><a href="admin-request.html"><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg" width="24"
+
+            <li id="menuadmin1"><a><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg" width="24"
                   height="24" viewBox="0 0 24 24">
                   <path id="Path_11385" data-name="Path 11385" d="M0,0H24V24H0Z" fill="none" />
                   <path id="Path_11386" data-name="Path 11386"
@@ -266,69 +377,82 @@
                 </svg>
 
                 &nbsp; หน้าแรก</a></li>
-            <li><a href="inven.html"><svg id="baseline-calendar_today-24px" xmlns="http://www.w3.org/2000/svg"
-                  width="24" height="24" viewBox="0 0 24 24">
+            <li id="menuadmin2"><a><svg id="baseline-calendar_today-24px" xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" viewBox="0 0 24 24">
                   <path id="Path_11391" data-name="Path 11391"
                     d="M20,3H19V1H17V3H7V1H5V3H4A2.006,2.006,0,0,0,2,5V21a2.006,2.006,0,0,0,2,2H20a2.006,2.006,0,0,0,2-2V5A2.006,2.006,0,0,0,20,3Zm0,18H4V8H20Z"
                     fill="#fff" />
                   <path id="Path_11392" data-name="Path 11392" d="M0,0H24V24H0Z" fill="none" />
                 </svg>
                 &nbsp; คลังวัสดุ</a></li>
-            <li><a href="adminstats.html"><svg xmlns="http://www.w3.org/2000/svg" width="20.24" height="20.24"
+
+
+            <li id="menuadmin3"><a><svg xmlns="http://www.w3.org/2000/svg" width="20.24" height="20.24"
                   viewBox="0 0 20.24 20.24">
                   <path id="ic_equalizer_24px"
                     d="M11.59,24.24h5.06V4H11.59ZM4,24.24H9.06V14.12H4ZM19.18,10.325V24.24h5.06V10.325Z"
                     transform="translate(-4 -4)" fill="#fff" />
                 </svg>
                 &nbsp; สถิติการเบิก</a> </li>
-            <li><a href="admin-record.html"><svg xmlns="http://www.w3.org/2000/svg" width="23.443" height="20.094"
+            <li id="menuadmin4"><a><svg xmlns="http://www.w3.org/2000/svg" width="23.443" height="20.094"
                   viewBox="0 0 23.443 20.094">
                   <path id="ic_restore_24px"
                     d="M14.4,3A10.048,10.048,0,0,0,4.349,13.047H1l4.342,4.342.078.156,4.51-4.5H6.582a7.852,7.852,0,1,1,2.3,5.515L7.3,20.147A10.044,10.044,0,1,0,14.4,3ZM13.28,8.582v5.582L18.057,17l.8-1.351-3.907-2.322V8.582Z"
                     transform="translate(-1 -3)" fill="#fff" />
                 </svg>
                 &nbsp; ประวัติการเบิก</a> </li>
-            
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="col-md-9">
-              <div class="filled-rounded-button">
-                <a href="indexlog.html">LOGOUT</a>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+            <center>
+              <div class="col-md-9">
+                <div class="container">
+                  <button class="btn btn-warning btn-lg btn-block " id="btnlogout" onclick="signOut()">Logout</button>
+                </div>
               </div>
-            </div>
+            </center>
+
           </ul>
         </nav>
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
 
-
     </div>
-
   </div>
-  <!-- Featured Posts -->
-
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
+  <script src="jquery/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="assets/js/browser.min.js"></script>
-  <script src="assets/js/breakpoints.min.js"></script>
-  <script src="assets/js/transition.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/custom.js"></script>
-  <script src="./libs/bootstrap/"></script>
-  </div>
+  <script src="js/browser.min.js"></script>
+  <script src="js/breakpoints.min.js"></script>
+  <script src="js/transition.js"></script>
+  <script src="js/owl-carousel.js"></script>
+  <script src="js/custom.js"></script>
+</body>
 
 
 </body>

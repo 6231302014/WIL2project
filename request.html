@@ -25,9 +25,10 @@
   <script src="local/logout.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-  <link rel="stylesheet" href="bgall.css">
-  <title>คลังวัสดุ</title>
+
+  <title>แจ้งเบิกวัสดุ</title>
 
 
 
@@ -43,7 +44,7 @@ https://templatemo.com/tm-529-ramayana
 
   <script>
     $(document).ready(function () {
-  
+
       $("#menuuser1").click(function () {
         window.location.replace("/index");
 
@@ -53,6 +54,11 @@ https://templatemo.com/tm-529-ramayana
 
       });
       $("#menuuser3").click(function () {
+        window.location.replace("/status");
+
+      });
+
+      $("#menuuser4").click(function () {
         window.location.replace("/userrecord");
 
       });
@@ -63,7 +69,7 @@ https://templatemo.com/tm-529-ramayana
 
 </head>
 
-<body class="is-preload">
+<body class="is-preload" style="background-color: whitesmoke;">
 
   <!-- Wrapper -->
   <div id="wrapper">
@@ -78,15 +84,68 @@ https://templatemo.com/tm-529-ramayana
           </div>
 
         </header>
+
+        <div>
+          <div>
+              <h1>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                      class="fa fa-user-circle"></i></h1>
+          </div>
+          <div style="float: right;">
+              <span>Panuwat Duangkham</span>
+          </div>
+
+      </div>
+      <br>
+      <br>
+      <br>
         <center>
           <h1>แบบฟอร์มเเจ้งเบิกวัสดุ</h1>
         </center>
         <center>
           <p style="font-size: 30px; color: black;">สำนักงานวิชาเทคโนโลยีสารสนเทศ</p>
         </center>
+        <br>
+        <br>
+
+
+        <div class="card">
+          <div class="card-body">วันที่ &nbsp; <input type="date" style="width: 150px;"> &nbsp;&nbsp;&nbsp;&nbsp;
+            รายการวัสดุ &nbsp;&nbsp;
+
+            <select>
+              <option value="0">รายการวัสดุทั้งหมด</option>
+              <option value="1" selected>วัสดุสำนักงาน</option>
+              <option value="2">วัสดุไฟฟ้าวิทยุ</option>
+              <option value="3">วัสดุคอมพิวเตอร์</option>
+              <option value="4">วัสดุงานบ้านงานครัว</option>
+              <option value="5">วัสดุเครื่องแต่งกาย</option>
+              <option value="6">วัสดุของที่ระลึก</option>
+            </select>
+
+            &nbsp;&nbsp;&nbsp;&nbsp; <br><br><br> รายการ &nbsp;&nbsp;&nbsp; <input type="text"
+              style="width: 50%;"><br><br><br>
+            จำนวน &nbsp;&nbsp;&nbsp; <input type="number">&nbsp;&nbsp;&nbsp; หน่วยนับ &nbsp;&nbsp;&nbsp; <input
+              type="text"> <br><br><br>
+            &nbsp;&nbsp;&nbsp; วัตถุประสงค์ &nbsp;&nbsp;&nbsp; <input type="text" style="width: 600px; height: 300px;">
+            <br>
+            <br>
+            <br>
+            <br>
+            <button type="button" class="btn btn-success btn-lg float-right">ส่ง</button>
+          </div>
+
+          
+
+
+        </div>
         <!-- Table Request -->
         <!-- <center> -->
-        <hr>
+        <!-- <hr>
 
         <label class="mb-2 mr-sm-2" style="color: black; font-size: 25px;">วันที่</label>
         <input type="date" class="form-control" style="width: 210px;">
@@ -114,10 +173,10 @@ https://templatemo.com/tm-529-ramayana
         <div id="textbox">
 
           <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#sent">ส่ง</button>
-        </div>
+        </div> -->
 
         <!--Modal Sent-->
-        <div class="modal fade" id="sent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-- <div class="modal fade" id="sent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -138,7 +197,7 @@ https://templatemo.com/tm-529-ramayana
           </div>
         </div>
 
-        
+         -->
 
 
 
@@ -232,7 +291,15 @@ https://templatemo.com/tm-529-ramayana
                   <path id="Path_11392" data-name="Path 11392" d="M0,0H24V24H0Z" fill="none" />
                 </svg>
                 &nbsp; แจ้งเบิกวัสดุ</a></li>
-            <li id="menuuser3"><a><svg xmlns="http://www.w3.org/2000/svg" width="23.443" height="20.094"
+                <li id="menuuser3"><a><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20.14"
+                  viewBox="0 0 20 20.14">
+                  <path id="ic_alarm_24px"
+                      d="M22,5.72,17.4,1.86,16.11,3.39l4.6,3.86ZM7.88,3.39,6.6,1.86,2,5.71,3.29,7.24,7.88,3.39ZM12.5,8H11v6l4.75,2.85.75-1.23-4-2.37ZM12,4a9,9,0,1,0,9,9A9,9,0,0,0,12,4Zm0,16a7,7,0,1,1,7-7A6.995,6.995,0,0,1,12,20Z"
+                      transform="translate(-2 -1.86)" fill="#fff" />
+              </svg>
+
+              &nbsp; ติดตามพัสดุ</a></li>
+            <li id="menuuser4"><a><svg xmlns="http://www.w3.org/2000/svg" width="23.443" height="20.094"
                   viewBox="0 0 23.443 20.094">
                   <path id="ic_restore_24px"
                     d="M14.4,3A10.048,10.048,0,0,0,4.349,13.047H1l4.342,4.342.078.156,4.51-4.5H6.582a7.852,7.852,0,1,1,2.3,5.515L7.3,20.147A10.044,10.044,0,1,0,14.4,3ZM13.28,8.582v5.582L18.057,17l.8-1.351-3.907-2.322V8.582Z"
@@ -253,20 +320,23 @@ https://templatemo.com/tm-529-ramayana
             <br>
             <br>
             <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-
-            <div class="col-md-9">
-              <div class="filled-rounded-button">
-                <button id="btnlogout" onclick="signOut()">Logout</button>
+            <center>
+              <div class="col-md-9">
+                <div class="container">
+                  <button class="btn btn-warning btn-lg btn-block " id="btnlogout" onclick="signOut()">Logout</button>
+                </div>
               </div>
-            </div>
+            </center>
           </ul>
         </nav>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <br>
         <br>
         <br>

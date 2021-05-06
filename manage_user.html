@@ -25,6 +25,7 @@
     <script src="local/logout.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <link rel="stylesheet" href="bgall.css">
     <title>จัดการผู้ใช้</title>
@@ -44,7 +45,7 @@ https://templatemo.com/tm-529-ramayana
     <script>
         $(document).ready(function () {
             var manageTable;
-                manageTable =  $("#itemtable7").dataTable({
+            manageTable = $("#itemtable7").dataTable({
                 responsive: true,
                 ajax: {
                     url: '/manage',
@@ -57,9 +58,11 @@ https://templatemo.com/tm-529-ramayana
                             if (json[row].role == 1) {
                                 json[row].role = "แอดมิน";
                             }
-                             else if (json[row].role == 2) {
+                            else if (json[row].role == 2) {
                                 json[row].role = "ผู้ใช้งาน";
                             } else if (json[row].role == 3) {
+                                json[row].role = "หัวหน้า";
+                            }else if (json[row].role == 4) {
                                 json[row].role = "ซุปเปอร์แอดมิน";
                             }
                         }
@@ -68,18 +71,34 @@ https://templatemo.com/tm-529-ramayana
                     },
                 },
                 columns: [
-                  { 'data': 'User_id', title: "ลำดับ" },
-                  { 'data': 'F_name', title: "ชื่อ" },
-                  { 'data': 'L_name', title: "นามสกุล" },
-                  { 'data': 'email', title: "อีเมลล์" },
-                  { 'data': 'role', title: "บทบาท" },
-                  { title: "ทำรายการ", orderable: false, defaultContent: "<button class='btn btn-success'>เปิดการใช้งาน</button> <button class='btn btn-danger'>ปิดการใช้งาน</button>" }
+                    { 'data': 'number', title: "ลำดับ" },
+                    { 'data': 'F_name', title: "ชื่อ" },
+                    { 'data': 'L_name', title: "นามสกุล" },
+                    { 'data': 'email', title: "อีเมลล์" },
+                    { 'data': 'role', title: "บทบาท" },
+                    { title: "ทำรายการ", orderable: false, defaultContent: "<center><button type='button' class='btn btn-warning '  data-toggle='modal' data-target='#editUser' id='btnEdit' >แก้ไข</button></center> " }
                 ],
-        
-              })
-      
+
+            })
+
+            $("#btnEdit").click(function () { 
+                 $("#txtFirstnameE").val();
+                 $("#txtLastnameE").val();
+                 $("#txtEmailE").val();
+                 $("#selectrole").val();
+                 $.ajax({
+                    type: "get",
+                    url: "/manage",
+                    success: function (data) {
+                         $("#txtFirstname").html(data[0].F_name);
+                    }
+                });
+            });
+            // F_name: txtFirstnameE, L_name: txtLastnameE, email: txtEmailE, role: selectrole 
+
+
         });
-      </script>
+    </script>
 
 </head>
 
@@ -99,12 +118,30 @@ https://templatemo.com/tm-529-ramayana
 
                 </header>
 
+                <div>
+                    <div>
+                        <h1>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                class="fa fa-user-circle"></i></h1>
+                    </div>
+                    <div style="float: right;">
+                        <span>Panuwat Duangkham</span>
+                    </div>
+
+                </div>
+                <br>
+
                 <div id="textbox">
-                    <h1 class="alignleft" style="color: white">จัดการผู้ใช้</h1>
+                    <h1 class="alignleft" style="color: black">จัดการผู้ใช้</h1>
                     <button type="button" class="btn btn-success float-right" data-toggle="modal"
                         data-target="#addUser">เพิ่มผู้ใช้</button>
                 </div>
                 <div style="clear: both;"></div>
+                <br>
 
 
                 <!-- Modal -->
@@ -121,15 +158,15 @@ https://templatemo.com/tm-529-ramayana
                             <div class="modal-body">
                                 <div class="form-group">
                                     ชื่อ
-                                    <input type="fname" class="form-control" id="txtFirstname" />
+                                    <input type="fname" class="form-control" id="txtFirstname" /><br>
                                     นามสกุล
-                                    <input type="lname" class="form-control" id="txtLastname" />
+                                    <input type="lname" class="form-control" id="txtLastname" /><br>
                                     อีเมลล์
-                                    <input type="email" class="form-control" id="txtEmail" />
+                                    <input type="email" class="form-control" id="txtEmail" /><br>
                                 </div>
                                 <div class="form-group">
                                     บทบาท
-                                    <select class="form-control" id="selectId" style="width: 200px; left: 400px;">
+                                    <select class="form-control" id="selectrole" style="width: 200px; left: 400px;">
                                         <option>แอดมิน</option>
                                         <option>ผู้ใช้งาน</option>
                                         <option>ซุปเปอร์แอดมิน</option>
@@ -139,18 +176,61 @@ https://templatemo.com/tm-529-ramayana
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal"
+                                    id="btnSaveAddUser">ตกลง</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                
-                                    <table id="itemtable7"  class="table table-striped table-bordered" style="width: 100%;">
-                                     
-                                    </table>
-                      
+
+                <!-- Modal Edit -->
+                <div class="modal fade" id="editUser" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header ">
+                                <h2 class="col-12 modal-title text-center " id="exampleModalLongTitle">แก้ไขผู้ใช้งาน
+                                </h2>
+
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    ชื่อ
+                                    <input type="text" class="form-control mb-1" id="txtFirstnameE"  disabled>
+                                    นามสกุล
+                                    <input type="text" class="form-control" id="txtLastnameE" disabled /><br>
+                                    อีเมลล์
+                                    <input type="text" class="form-control" id="txtEmailE" disabled /><br>
+                                </div>
+                                <div class="form-group">
+                                    บทบาท
+                                    <select class="form-control" id="selectrole" style="width: 200px; left: 400px;">
+                                        <option value="1">แอดมิน</option>
+                                        <option value="2">ผู้ใช้งาน</option>
+                                        <option value="3">หัวหน้า</option>
+                                        <option value="4">ซุปเปอร์แอดมิน</option>
+
+
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal" id="btnsaveEdit">ตกลง</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <table id="itemtable7" class="table table-striped table-bordered" style="width: 100%;">
+
+                </table>
+
 
             </div>
         </div>
@@ -215,8 +295,8 @@ https://templatemo.com/tm-529-ramayana
                 <!-- Menu -->
                 <nav id="menu">
                     <ul>
-                        <li><a href="manage_user.html"><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" viewBox="0 0 24 24">
+                        <li><a href="manage_user.html"><svg id="outline-dashboard-24px"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path id="Path_11385" data-name="Path 11385" d="M0,0H24V24H0Z" fill="none" />
                                     <path id="Path_11386" data-name="Path 11386"
                                         d="M19,5V7H15V5h4M9,5v6H5V5H9m10,8v6H15V13h4M9,17v2H5V17H9M21,3H13V9h8ZM11,3H3V13h8Zm10,8H13V21h8ZM11,15H3v6h8Z"
@@ -224,7 +304,8 @@ https://templatemo.com/tm-529-ramayana
                                 </svg>
 
                                 &nbsp; จัดการผู้ใช้</a></li>
-                    
+                                <hr >
+
                         <br>
                         <br>
                         <br>
@@ -244,25 +325,29 @@ https://templatemo.com/tm-529-ramayana
                         <br>
                         <br>
                         <br>
-                
-                        <div class="col-md-9">
-                            <div class="filled-rounded-button">
-                                <button id="btnlogout" onclick="signOut()">Logout</button>
+
+                        <center>
+                            <div class="col-md-9">
+                                <div class="container">
+                                    <button class="btn btn-warning btn-lg btn-block " id="btnlogout"
+                                        onclick="signOut()">Logout</button>
+                                </div>
                             </div>
-                        </div>
+                        </center>
+
                     </ul>
                 </nav>
-            <br>
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
-           <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
 
         </div>
