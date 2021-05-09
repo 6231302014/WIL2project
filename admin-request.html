@@ -76,8 +76,8 @@ https://templatemo.com/tm-529-ramayana
                         { 'data': 'F_name', title: "ชื่อ" },
                         { 'data': 'L_name', title: "นามสกุล" },
                         { 'data': 'email', title: "อีเมลล์" },
-                        { 'data': 'requis_status', title: "สถานะ", }
-
+                        { 'data': 'requis_status', title: "สถานะ", },
+                        { title: "ทำรายการ", orderable: false, defaultContent: "<center><button type='button' class='btn btn-info '  data-toggle='modal' data-target='#editUser' id='btninfo' >รายละเอียดเพิ่มเติม</button></center> " }
                     ]
                 })
 
@@ -98,7 +98,10 @@ https://templatemo.com/tm-529-ramayana
                     window.location.replace("/adminrecord");
 
                 });
-
+            
+                if(text=="อนุมัติ"){
+                     
+                }
 
 
 
@@ -107,7 +110,7 @@ https://templatemo.com/tm-529-ramayana
 
         </script>
     
-
+        
 
 
 

@@ -8,7 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="css/animate.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
@@ -104,7 +103,6 @@ https://templatemo.com/tm-529-ramayana
                         cancelButton: "Close",
                     })
                     $("#modalAdd").modal("toggle");
-                    // invenTable.ajax.reload();
                     $("#itemtable6").DataTable().ajax.reload();
                 }).fail(function (xhr, state) {
                     Swal.fire(xhr.responseText);
@@ -173,8 +171,6 @@ https://templatemo.com/tm-529-ramayana
 
                 <div id="textbox">
                     <h1 class="alignleft" style="color: black">คลังวัสดุ</h1>
-                    <!-- <button type="button" class="btn btn-success float-right" data-toggle="modal"
-                        data-target="#addUser">เพิ่มวัสดุ</button> -->
                     <button class="btn btn-primary" id="btnAdditem">เพิ่มวัสดุ</button>
                 </div>
                 <div style="clear: both;"></div>

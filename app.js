@@ -281,45 +281,42 @@ app.get("/manage", function (req, res) {
     });
 });
 
-
-app.get("/manageedit", function (req, res) {
-    const F_name = req.body.F_name;
-    const L_name = req.body.L_name;
-    const email = req.body.email;
+app.post("/manageedit", (req, res) => {
+    // console.log(req.body);
     const role = req.body.role;
-    const sql = "UPDATE user SET F_name=?,L_name=?,email=?,role=? WHERE User_id = ?";
-    con.query(sql, [F_name,L_name,email,role], function (err, result, fields) {
-        if (err) {
-            console.log(err);
-            res.status(500).end("Server error");
-        }else{
-            res.send("Change complete!!.");
-        }
-    });
-
+    const sql = "UPDATE user SET role VALUE ? WHERE User_id = ?";
+            con.query(sql, [role], function (err, result)  {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Database server error.");
+                } else {
+                        res.send("Edit user success!");
+                   
+                }
+            });
 });
 
 
-app.get("/adduser", function (req, res) {
+
+app.post("/adduser", (req, res) => {
+    // console.log(req.body);
     const F_name = req.body.F_name;
     const L_name = req.body.L_name;
     const email = req.body.email;
     const role = req.body.role;
-
     const sql = "INSERT INTO user (F_name,L_name,email,role) VALUES (?,?,?,?)";
-    database.query(sql, [F_name, L_name,email, role], function(err, result){
-        if (err) {
-            res.status(500).send("Database server error.");
-        } else {
-            if (result.affectedRows == 1) {
-                res.send("New user has been added.");
-            } else {
-                res.status(501).send("Error while adding new user.");
-            }
-        }
-    });
-
-     
+            con.query(sql, [F_name, L_name, email, role], function (err, result)  {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Database server error.");
+                } else {
+                    if (result.affectedRows == 1) {
+                        res.send("New user has been added.");
+                    } else {
+                        res.status(501).send("Error while adding new user.");
+                    }
+                }
+            });
 });
 
 
