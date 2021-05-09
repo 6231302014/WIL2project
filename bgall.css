@@ -1,4 +1,4 @@
-/* body{
+/* /* body{
     background: url(" https://wallpaperaccess.com/full/1738019.jpg") no-repeat center center fixed;
 	background-size: cover;
 	font-size: 16px;
@@ -9,7 +9,7 @@
 
 } */
 
-body::before{
+/* body::before{
 	content: "";
 	background: url("https://i.pinimg.com/originals/13/9b/c0/139bc04adcfd5bec7235370d7ff43f40.jpg");
 	background-size: cover;
@@ -24,4 +24,4 @@ body::before{
 }
 body{
 	background-color: whitesmoke;
-}
+}  */
