@@ -160,7 +160,16 @@ https://templatemo.com/tm-529-ramayana
                 const email = $("#email").val("");
             }
             //--------------------------------------------------------------------------------------------------------
-
+        //   $.ajax({
+        //       type: "GET",
+        //       url: "/getuserinfo",
+        //       data: "",
+        //       success: function (response) {
+        //           console.log(response);
+        //           $("#showfname").text(resonpse[0].F_name);
+        //           $("#showlname").text(resonpse[0].L_name);
+        //       }
+        //   });
 
 
             $("#menusuper").click(function () {
@@ -186,9 +195,7 @@ https://templatemo.com/tm-529-ramayana
                     <div class="logo">
                         <a>School of IT</a>
                     </div>
-
                 </header>
-
                 <div>
                     <div>
                         <h1>
@@ -200,8 +207,9 @@ https://templatemo.com/tm-529-ramayana
                                 class="fa fa-user-circle"></i></h1>
                     </div>
                     <div style="float: right;">
-                        <span>Panuwat Duangkham</span>
+                        <span></span><a id="showfname"></a>Panuwat Duangkham<a id="showlname"></a></span>
                     </div>
+                
 
                 </div>
                 <br>
@@ -222,9 +230,6 @@ https://templatemo.com/tm-529-ramayana
                             <div class="modal-header ">
                                 <h2 class="col-12 modal-title text-center " id="exampleModalCenterTitleLong">เพิ่มผู้ใช้
                                 </h2>
-
-
-
                             </div>
                             <div class="modal-body container-fluid">
                                 <!-- Form Add item -->
@@ -236,7 +241,6 @@ https://templatemo.com/tm-529-ramayana
                                     <div class="container-fluid">
                                         <input type="text" name="add_lname" class="form-control"
                                             placeholder="นามสกุล"><br>
-
 
                                     </div>
 
@@ -263,7 +267,6 @@ https://templatemo.com/tm-529-ramayana
 
                                         <button type="button" style="float: right;" class="btn btn-danger"
                                             data-dismiss="modal">ยกเลิก</button>
-
                                 </form>
                             </div>
                         </div>
@@ -450,7 +453,7 @@ https://templatemo.com/tm-529-ramayana
         </div>
 
     </div>
-    </div>
+    
 
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->

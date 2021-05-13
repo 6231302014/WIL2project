@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <link rel="stylesheet" href="bgall.css">
-    <title>อนุมัติ</title>
+    <title>คำขอเบิก</title>
 
 
 
@@ -43,84 +43,78 @@ https://templatemo.com/tm-529-ramayana
     <link rel="stylesheet" href="css/owl.css">
 
 
-    
-        <script>
-            $(document).ready(function () {
-                var requisTable;
-                requisTable = $("#itemtable3").dataTable({
-                    responsive: true,
-                    ajax: {
-                        url: '/adminreq',
-                        dataSrc: function (json) {
-                            // Modify some columns   
-                            for (let row = 0; row < json.length; row++) {
-                                // add new column 'number' and set its value
-                                json[row].number = row + 1;
-                                // rename values of column 'requis_status'
-                                if (json[row].requis_status == 1) {
-                                    json[row].requis_status = "กำลังดำเนินการ";
-                                }
-                                else if (json[row].requis_status == 2) {
-                                    json[row].requis_status = "อนุมัติ";
-                                } else if (json[row].requis_status == 3) {
-                                    json[row].requis_status = "ไม่อนุมัติ";
-                                }
+
+    <script>
+        $(document).ready(function () {
+            var requisTable;
+            requisTable = $("#itemtable3").dataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+                },
+                responsive: true,
+                ajax: {
+                    url: '/adminreq',
+                    dataSrc: function (json) {
+                        // Modify some columns   
+                        for (let row = 0; row < json.length; row++) {
+                            // add new column 'number' and set its value
+                            json[row].number = row + 1;
+                            // rename values of column 'requis_status'
+                            if (json[row].requis_status == 1) {
+                                json[row].requis_status = "กำลังดำเนินการ";
                             }
-                            return json;
-                        },
+                            else if (json[row].requis_status == 2) {
+                                json[row].requis_status = "อนุมัติ";
+                            } else if (json[row].requis_status == 3) {
+                                json[row].requis_status = "ไม่อนุมัติ";
+                            }
+                        }
+                        return json;
                     },
-                    columns: [
-                        { 'data': 'number', title: "ลำดับ" },
-                        { 'data': 'requis_date', title: "วันที่" },
-                        { 'data': 'requis_id', title: "รหัสวัสดุ" },
-                        { 'data': 'F_name', title: "ชื่อ" },
-                        { 'data': 'L_name', title: "นามสกุล" },
-                        { 'data': 'email', title: "อีเมลล์" },
-                        { 'data': 'requis_status', title: "สถานะ", },
-                        { title: "ทำรายการ", orderable: false, defaultContent: "<center><button type='button' class='btn btn-info '  data-toggle='modal' data-target='#editUser' id='btninfo' >รายละเอียดเพิ่มเติม</button></center> " }
-                    ]
-                })
+                },
+                columns: [
+                    { 'data': 'number', title: "ลำดับ" },
+                    { 'data': 'requis_date', title: "วันที่" },
+                    { 'data': 'requis_id', title: "คำขอเบิกที่" },
+                    { 'data': 'F_name', title: "ชื่อ" },
+                    { 'data': 'L_name', title: "นามสกุล" },
+                    { 'data': 'email', title: "อีเมลล์" },
+                    { 'data': 'requis_status', title: "สถานะ", },
+                    { title: "ทำรายการ", orderable: false, defaultContent: "<center><button type='button' class='btn btn-info '  data-toggle='modal' data-target='#modalrequest' id='btninfo' >รายละเอียดเพิ่มเติม</button></center> " }
+                ]
+            })
 
 
-                $("#menuadmin1").click(function () {
-                    window.location.replace("/adminrequest");
+            $("#menuadmin1").click(function () {
+                window.location.replace("/adminrequest");
 
-                });
-                $("#menuadmin2").click(function () {
-                    window.location.replace("/inven");
+            });
+            $("#menuadmin2").click(function () {
+                window.location.replace("/inven");
 
-                });
-                $("#menuadmin3").click(function () {
-                    window.location.replace("/stats");
+            });
+            $("#menuadmin3").click(function () {
+                window.location.replace("/stats");
 
-                });
-                $("#menuadmin4").click(function () {
-                    window.location.replace("/adminrecord");
-
-                });
-            
-                if(text=="อนุมัติ"){
-                     
-                }
-
-
+            });
+            $("#menuadmin4").click(function () {
+                window.location.replace("/adminrecord");
 
             });
 
-
-        </script>
-    
-        
+           // $("#modalrequest").modal("show");
 
 
 
+        });
+
+
+    </script>
 </head>
 
 <body class="is-preload" style="background-color: whitesmoke;">
-
     <!-- Wrapper -->
     <div id="wrapper">
-
         <!-- Main -->
         <div id="main">
             <div class="inner">
@@ -129,12 +123,7 @@ https://templatemo.com/tm-529-ramayana
                     <div class="logo">
                         <a>School of IT</a>
                     </div>
-
                 </header>
-
-
-
-
                 <div>
                     <div>
                         <h1>
@@ -154,19 +143,56 @@ https://templatemo.com/tm-529-ramayana
 
                 <div id="textbox">
                     <h1 class="alignleft" style="color: black">หน้าแรก</h1>
-
                 </div>
                 <div style="clear: both;"></div>
                 <br>
+         
+                <!-- Modal -->
+                <div class="modal fade" id="modalrequest" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header ">
+                                <h2 class="col-12 modal-title text-center " id="exampleModalCenterTitleLong">รายการ
+                                </h2>
+                            </div>
+                            <div class="modal-body container-fluid">
+                                <!-- Form Add item -->
+                                <form class="container-fluid" id="formAddPro">
+                                    <div class="container-fluid">
+                                        <input type="text" class="form-control" id="moreinfodate"><br>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <input type="text" id="moreinfoid" class="form-control"placeholder="รหัสวัสดุ"><br>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <input type="text" id="moreinfofname" class="form-control"placeholder="ชื่อวัสดุ"><br>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <input type="number" name="add_amount" class="form-control"
+                                            style="width: 250px;" placeholder="จำนวนวัสดุ"><br>
+                                    </div>
+                                    <div class="container-fluid">
+                                        <input type="text" name="add_count" class="form-control" style="width: 250px;"
+                                            placeholder="หน่วยนับ"><br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button style="float: left;" type="submit" class="btn btn-success"
+                                            id="btnAddConfirm">เพิ่มวัสดุ</button>
 
-
-
-                <table id="itemtable3" style="width:100%"> </table>
-
-
-
-
+                                        <button type="button" style="float: right;" class="btn btn-danger"
+                                            data-dismiss="modal">ยกเลิก</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+                <table id="itemtable3" class="table table-striped table-bordered" style="width: 100%;">
+                </table>
+
+        </div>    
+           
         </div>
 
         <!-- Sidebar -->
@@ -299,7 +325,8 @@ https://templatemo.com/tm-529-ramayana
             </div>
 
         </div>
-    </div>
+    
+
 
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->

@@ -25,7 +25,7 @@
   <script src="local/logout.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
   <title>แจ้งเบิกวัสดุ</title>
@@ -65,7 +65,21 @@ https://templatemo.com/tm-529-ramayana
 
     });
   </script>
+  <style>
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 300px;
+      /* Should be removed. Only for demonstration */
+    }
 
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
 
 </head>
 
@@ -87,22 +101,18 @@ https://templatemo.com/tm-529-ramayana
 
         <div>
           <div>
-              <h1>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                      class="fa fa-user-circle"></i></h1>
+            <h1>
+              <i class="fa fa-user-circle" style="width: 100%; margin-left: 1175px;"></i>
+            </h1>
           </div>
-          <div style="float: right;">
-              <span>Panuwat Duangkham</span>
+          <div style="width: 100%; margin-left: 1110px;">
+            <span>Panuwat Duangkham</span>
           </div>
 
-      </div>
-      <br>
-      <br>
-      <br>
+        </div>
+        <br>
+        <br>
+        <br>
         <center>
           <h1>แบบฟอร์มเเจ้งเบิกวัสดุ</h1>
         </center>
@@ -113,11 +123,12 @@ https://templatemo.com/tm-529-ramayana
         <br>
 
 
-        <div class="card">
-          <div class="card-body">วันที่ &nbsp; <input type="date" style="width: 150px;"> &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="form-control" style="height: 100%; width: 100%;">
+          <div class="card-body">&nbsp;&nbsp;&nbsp;&nbsp;วันที่ &nbsp; <input type="date" style="width: 200px;"
+              class="form-control"> <br>&nbsp;&nbsp;&nbsp;&nbsp;
             รายการวัสดุ &nbsp;&nbsp;
 
-            <select>
+            <select style="width: 600px;" class="form-control">
               <option value="0">รายการวัสดุทั้งหมด</option>
               <option value="1" selected>วัสดุสำนักงาน</option>
               <option value="2">วัสดุไฟฟ้าวิทยุ</option>
@@ -125,21 +136,28 @@ https://templatemo.com/tm-529-ramayana
               <option value="4">วัสดุงานบ้านงานครัว</option>
               <option value="5">วัสดุเครื่องแต่งกาย</option>
               <option value="6">วัสดุของที่ระลึก</option>
-            </select>
+            </select><br>
 
-            &nbsp;&nbsp;&nbsp;&nbsp; <br><br><br> รายการ &nbsp;&nbsp;&nbsp; <input type="text"
-              style="width: 50%;"><br><br><br>
-            จำนวน &nbsp;&nbsp;&nbsp; <input type="number">&nbsp;&nbsp;&nbsp; หน่วยนับ &nbsp;&nbsp;&nbsp; <input
-              type="text"> <br><br><br>
-            &nbsp;&nbsp;&nbsp; วัตถุประสงค์ &nbsp;&nbsp;&nbsp; <input type="text" style="width: 600px; height: 300px;">
-            <br>
-            <br>
-            <br>
-            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp; รายการ &nbsp;&nbsp;&nbsp; <input class="form-control" type="text"
+              style="width: 600px;"><br>
+            &nbsp;&nbsp;&nbsp; จำนวน &nbsp;&nbsp;&nbsp; <input class="form-control" style="width: 600px;"
+              type="number">&nbsp;&nbsp;&nbsp;<br>
+            &nbsp;&nbsp;&nbsp; หน่วยนับ &nbsp;&nbsp;&nbsp; <input style="width: 600px;" class="form-control"
+              type="text"><br>
+            &nbsp;&nbsp;&nbsp; วัตถุประสงค์ &nbsp;&nbsp;&nbsp; <input class="form-control" type="text"
+              style="width: 600px; height: 300px;"> <br>
+              <div class="row">
+                <div class="column" style="background-color:#bbb;">
+                  <h2>Column 2</h2>
+                  <p>Some text..</p>
+                </div>
+              </div>
             <button type="button" class="btn btn-success btn-lg float-right">ส่ง</button>
+            <br>
+            <br>
           </div>
 
-          
+
 
 
         </div>
@@ -291,14 +309,14 @@ https://templatemo.com/tm-529-ramayana
                   <path id="Path_11392" data-name="Path 11392" d="M0,0H24V24H0Z" fill="none" />
                 </svg>
                 &nbsp; แจ้งเบิกวัสดุ</a></li>
-                <li id="menuuser3"><a><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20.14"
+            <li id="menuuser3"><a><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20.14"
                   viewBox="0 0 20 20.14">
                   <path id="ic_alarm_24px"
-                      d="M22,5.72,17.4,1.86,16.11,3.39l4.6,3.86ZM7.88,3.39,6.6,1.86,2,5.71,3.29,7.24,7.88,3.39ZM12.5,8H11v6l4.75,2.85.75-1.23-4-2.37ZM12,4a9,9,0,1,0,9,9A9,9,0,0,0,12,4Zm0,16a7,7,0,1,1,7-7A6.995,6.995,0,0,1,12,20Z"
-                      transform="translate(-2 -1.86)" fill="#fff" />
-              </svg>
+                    d="M22,5.72,17.4,1.86,16.11,3.39l4.6,3.86ZM7.88,3.39,6.6,1.86,2,5.71,3.29,7.24,7.88,3.39ZM12.5,8H11v6l4.75,2.85.75-1.23-4-2.37ZM12,4a9,9,0,1,0,9,9A9,9,0,0,0,12,4Zm0,16a7,7,0,1,1,7-7A6.995,6.995,0,0,1,12,20Z"
+                    transform="translate(-2 -1.86)" fill="#fff" />
+                </svg>
 
-              &nbsp; ติดตามพัสดุ</a></li>
+                &nbsp; ติดตามพัสดุ</a></li>
             <li id="menuuser4"><a><svg xmlns="http://www.w3.org/2000/svg" width="23.443" height="20.094"
                   viewBox="0 0 23.443 20.094">
                   <path id="ic_restore_24px"

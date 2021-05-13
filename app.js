@@ -208,7 +208,7 @@ app.get("/adminreq", function (req, res) {
     });
 });
 
-
+//------------ Inventory -------------
 app.get("/inventory", function (req, res) {
     const sql = "SELECT product_id,addDate,name_pro,amount_pro,unit_pro FROM product";
     con.query(sql, function (err, result, fields) {
@@ -259,7 +259,7 @@ app.post("/additem", (req, res) => {
     });
 });
 
-
+//----------------- Manageuser -----------------------------------
 app.get("/manage", function (req, res) {
     const sql = "SELECT F_name,L_name,email,role FROM user";
     con.query(sql, function (err, result, fields) {
@@ -301,9 +301,6 @@ app.post("/manageedit", function (req, res) {
         }
     });
 });
-
-
-
 
 app.post("/adduser", (req, res) => {
     //console.log(req.body);
@@ -368,9 +365,55 @@ app.delete("/inven/:product_id", function (req, res) {
         }
     });
 });
+//---------------- stat ---------------------------------
+app.get("/statitem", function (req, res) {
+    const sql = "SELECT requis_pickup, requis_pro,name_pro, requis_quantity, unit_pro, requis_status FROM requisition INNER JOIN product ON requis_id = product_no WHERE requis_pro = product_id AND requis_status = 2";
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }
 
-
-
+        const numrows = result.length;
+        //if no data
+        if (numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            let i;
+            for (i = 0; i < result.length; i++) {
+                let d = new Date(result[i].requis_pickup);
+                let Year = d.getFullYear();
+                let Month = d.getMonth() + 1;
+                let date = d.getDate();
+                result[i].requis_pickup = date + '/' + Month + '/' + Year;
+            }
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+//--------------------- get userinfo ---------------------------------------
+// app.get("/getuserinfo", function (req, res) {
+//     const sql = "SELECT F_name,L_name FROM user WHERE User_id = 2";
+//     con.query(sql, function (err, result, fields) {
+//         if (err) {
+//             console.error(err.message);
+//             res.status(500).send("Server Error");
+//             return;
+//         }
+//         const numrows = result.length;
+//         //if no data
+//         if (numrows == 0) {
+//             res.status(500).send("No data");
+//         }
+//         else {
+//             //return json of recordset
+//             res.json(result);
+//         }
+//     });
+// });
 
 // =============== Other routes ==================
 const client = new OAuth2Client(process.env.CLIENT_ID);

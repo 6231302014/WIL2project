@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
-  <title>คลังวัสดุ</title>
+  <title>หน้าแรก</title>
 
 
 
@@ -48,6 +48,9 @@ https://templatemo.com/tm-529-ramayana
     $(document).ready(function () {
       var invenTable;
       invenTable = $("#itemtable6").dataTable({
+        language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+                },
         responsive: true,
         ajax: {
           url: '/inventory',
