@@ -1,0 +1,9 @@
+POST http://localhost:3000/manageedit
+Content-Type: application/json
+
+{
+    "F_name":"Wasitpon",
+    "L_name": "Saithanya",
+    "email":"6231302023@lamduan.mfu.ac.th",
+    "role":4
+}

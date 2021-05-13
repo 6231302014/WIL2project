@@ -1,0 +1,27 @@
+/* /* body{
+    background: url(" https://wallpaperaccess.com/full/1738019.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-size: 16px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	color: #666;
+
+} */
+
+body::before{
+	content: "";
+	background: url("https://i.pinimg.com/originals/13/9b/c0/139bc04adcfd5bec7235370d7ff43f40.jpg");
+	background-size: cover;
+	position:absolute;
+	top: 0px;
+	right: 0px;
+	bottom: -290px;
+	left: 0px;
+	opacity: 0.8;
+	
+	
+}
+body{
+	background-color: whitesmoke;
+} 
