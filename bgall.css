@@ -9,7 +9,7 @@
 
 } */
 
-/* body::before{
+body::before{
 	content: "";
 	background: url("https://i.pinimg.com/originals/13/9b/c0/139bc04adcfd5bec7235370d7ff43f40.jpg");
 	background-size: cover;
@@ -24,4 +24,4 @@
 }
 body{
 	background-color: whitesmoke;
-}  */
+} 
