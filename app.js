@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // =============== Page routes ==================
 
+
 app.get('/index',checkUser,(req,res) => {
     res.sendFile(path.join(__dirname, "/index.html"));
         // res.render('index',{user: req.session.user});
@@ -43,6 +44,12 @@ app.get('/userrecord',checkUser,(req,res) => {
 
 });
 
+
+app.get('/status',checkUser,(req,res) => {
+    res.sendFile(path.join(__dirname, "/statususer.html"));
+        // res.render('index',{user: req.session.user});
+   
+});
 app.get('/inven',checkUser,(req,res) => {
     res.sendFile(path.join(__dirname, "/inven.html"));
         // res.render('index',{user: req.session.user});
@@ -159,6 +166,15 @@ app.get("/userhis", function (req, res) {
         }
         else {
             //return json of recordset
+            let i;
+            for (i=0;i<result.length;i++){
+                let d = new Date(result[i].requis_pickup);
+                let Year = d.getFullYear();
+                let Month = d.getMonth() + 1;
+                let date = d.getDate();
+                result[i].requis_pickup = date + '/' + Month + '/' + Year;
+            }
+      
             res.json(result);
         }
     });
@@ -178,6 +194,14 @@ app.get("/adminreq", function (req, res) {
             res.status(500).send("No data");
         }
         else {
+            let i;
+            for (i=0;i<result.length;i++){
+                let d = new Date(result[i].requis_date);
+                let Year = d.getFullYear();
+                let Month = d.getMonth() + 1;
+                let date = d.getDate();
+                result[i].requis_date = date + '/' + Month + '/' + Year;
+            }
             //return json of recordset
             res.json(result);
         }
@@ -186,7 +210,7 @@ app.get("/adminreq", function (req, res) {
 
 
 app.get("/inventory", function (req, res) {
-    const sql = "SELECT product_no,product_id,name_pro,amount_pro,unit_pro FROM product";
+    const sql = "SELECT product_id,addDate,name_pro,amount_pro,unit_pro FROM product";
     con.query(sql, function (err, result, fields) {
         if (err) {
             console.error(err.message);
@@ -201,13 +225,43 @@ app.get("/inventory", function (req, res) {
         }
         else {
             //return json of recordset
+            let i;
+            for (i=0;i<result.length;i++){
+                let d = new Date(result[i].addDate);
+                let Year = d.getFullYear();
+                let Month = d.getMonth() + 1;
+                let date = d.getDate();
+                result[i].addDate = date + '/' + Month + '/' + Year;
+            }
             res.json(result);
         }
     });
 });
+app.post("/additem", (req, res) => {
+    // console.log(req.body);
+    const addDate = req.body.add_date;
+    const product_id = req.body.add_id;
+    const name_pro = req.body.add_name;
+    const amount_pro = req.body.add_amount;
+    const unit_pro = req.body.add_count;
+    const sql = "INSERT INTO product (addDate,product_id,name_pro,amount_pro,unit_pro) VALUES (?,?,?,?,?)";
+            con.query(sql, [addDate, product_id, name_pro, amount_pro, unit_pro], function (err, result) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Database server error.");
+                } else {
+                    if (result.affectedRows == 1) {
+                        res.send("New item has been added.");
+                    } else {
+                        res.status(501).send("Error while adding new item.");
+                    }
+                }
+            });
+});
+
 
 app.get("/manage", function (req, res) {
-    const sql = "SELECT User_id,F_name,L_name,email,role FROM user";
+    const sql = "SELECT F_name,L_name,email,role FROM user";
     con.query(sql, function (err, result, fields) {
         if (err) {
             console.error(err.message);
@@ -227,6 +281,43 @@ app.get("/manage", function (req, res) {
     });
 });
 
+app.post("/manageedit", (req, res) => {
+    // console.log(req.body);
+    const role = req.body.role;
+    const sql = "UPDATE user SET role VALUE ? WHERE User_id = ?";
+            con.query(sql, [role], function (err, result)  {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Database server error.");
+                } else {
+                        res.send("Edit user success!");
+                   
+                }
+            });
+});
+
+
+
+app.post("/adduser", (req, res) => {
+    // console.log(req.body);
+    const F_name = req.body.F_name;
+    const L_name = req.body.L_name;
+    const email = req.body.email;
+    const role = req.body.role;
+    const sql = "INSERT INTO user (F_name,L_name,email,role) VALUES (?,?,?,?)";
+            con.query(sql, [F_name, L_name, email, role], function (err, result)  {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Database server error.");
+                } else {
+                    if (result.affectedRows == 1) {
+                        res.send("New user has been added.");
+                    } else {
+                        res.status(501).send("Error while adding new user.");
+                    }
+                }
+            });
+});
 
 
 
@@ -268,6 +359,8 @@ app.post('/verifyUser',(req,res) =>{
     res.send('/adminrequest')
    }else if(result[0].role == 3){
        res.send('/leaderstats')
+   }else if(result[0].role == 4){
+       res.send('/manageuser')
    }
      });
  
@@ -293,6 +386,7 @@ app.get('/logout', (req,res) => {
 });
 
 const PORT = process.env.PORT;
+
 
 app.listen(PORT, () =>{
  console.log('Server starts at ' + PORT);
