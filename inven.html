@@ -27,7 +27,8 @@
     <script src="local/logout.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <title>คลังวัสดุ</title>
@@ -45,9 +46,13 @@ https://templatemo.com/tm-529-ramayana
     <link rel="stylesheet" href="css/owl.css">
 
     <script>
+        var invenTable;
         $(document).ready(function () {
-            var invenTable;
-            invenTable = $("#itemtable6").dataTable({
+            var edit_amount = $("#edit_amount").val();
+            invenTable = $("#itemtable6").DataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+                },
                 responsive: true,
                 ajax: {
                     url: '/inventory',
@@ -61,7 +66,7 @@ https://templatemo.com/tm-529-ramayana
 
                         return json;
                     },
-                    
+
                 },
                 columns: [
                     { 'data': 'number', title: "ลำดับ" },
@@ -70,11 +75,17 @@ https://templatemo.com/tm-529-ramayana
                     { 'data': 'name_pro', title: "รายการวัสดุ" },
                     { 'data': 'amount_pro', title: "จำนวนวัสดุ" },
                     { 'data': 'unit_pro', title: "หน่วยนับ" },
+                    { title: "ทำรายการ", orderable: false, defaultContent: " <button class='btn btn-warning'>แก้ไข</button> <button class='btn btn-danger'>ลบวัสดุ</button>" }
 
+                ], columnDefs: [
+                    // make the last column align right, also target: "_all"
+                    { "className": "dt-center", "targets": 4 }
+                ]
 
-                ],
+            });
+            EditAction();
+            deleteAction();
 
-            })
 
 
             $("#btnAdditem").click(function () {
@@ -108,7 +119,98 @@ https://templatemo.com/tm-529-ramayana
                     Swal.fire(xhr.responseText);
                 });
             });
+//--------------------------------------------------------------------------------------------------------
+                    ///Edit item
+            function EditAction() {
+                $('#itemtable6 tbody').on('click', '.btn-warning', function () {
+                    const currentRow = $(this).parents('tr');
+                    const selectedData = invenTable.row(currentRow).data();
+                    $("#product_id").val(selectedData.product_id).prop('disabled', true);
+                    $("#addDate").val(selectedData.addDate).prop('disabled', true);
+                    $("#name_pro").val(selectedData.name_pro).prop('disabled', true);
+                    $("#unit_pro").val(selectedData.unit_pro).prop('disabled', true);
+                    $("#editItem").modal("show");
+                    //alert(selectedData.name_pro);
+     
+                });
+            }
+           
+            $("#btnsaveEdit").click(function () {
+            const amount_pro = $("#amount_pro").val();
+            const product_id = $("#product_id").val();
+            if  ($("#amount_pro").val() == "" || $("#product_id").val() == ""){ 
+                    Swal.fire({
+                        icon: "error",
+                        title: "ข้อมูลไม่ครบ !",
+                        text: "กรุณากรอกรหัสวัสดุและจำนวนวัสดุ !"
+                        
+                    })
+                
+               
+            }else{
+                getNewAmount();
+                $.ajax({
+                    method: "POST",
+                    url: "/itemedit",
+                    data: {amount_pro : amount_pro,product_id:product_id},
+                }).done(function (data, state, xhr) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "แก้ไขจำนวนวัสดุสำเร็จ!!",
+                        
+                    })
+                    $("#itemtable6").DataTable().ajax.reload();
+                }).fail(function (xhr, state, error) {
+                    Swal.fire(xhr.responseText);
+                });
+            }
 
+           
+            });
+
+            function getNewAmount(){
+                const amount_pro = $("#amount_pro").val("");
+                const product_id = $("#product_id").val("");
+            }
+//--------------------------------------------------------------------------------------------------------
+           /// Delete Item
+            function deleteAction() {
+            $('#itemtable6 tbody').on('click', '.btn-danger', function () {
+                const currentRow = $(this).parents('tr');
+                const selectedData = invenTable.row(currentRow).data();
+                // alert(selectedData.product_id);
+                Swal.fire({
+                    icon: "warning",
+                    title: "ต้องการลบ " + selectedData.product_id  + selectedData.name_pro + "?",
+                    showCancelButton: true,
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก"
+                }).then(function (result) {
+                    if (result.isConfirmed) {
+                        deleteUser(currentRow, selectedData.product_id);
+                    }
+                });
+            });
+        }
+
+        // -------- Delete user ---------
+        function deleteUser(row, product_id) {
+            $.ajax({
+                method: "DELETE",
+                url: "/inven/" + product_id
+            }).done(function (data, state, xhr) {
+                invenTable.row(row).remove().draw(false);
+                Swal.fire('ลบวัสดุสำเร็จ!', '', 'success');
+            }).fail(function (xhr, state, error) {
+                //delete failed
+                alert(xhr.responseText);
+            });
+        }
+
+ 
+   
+
+              // link page
             $("#menuadmin1").click(function () {
                 window.location.replace("/adminrequest");
 
@@ -160,7 +262,7 @@ https://templatemo.com/tm-529-ramayana
                                 class="fa fa-user-circle"></i></h1>
                     </div>
                     <div style="float: right;">
-                        <span>Panuwat Duangkham</span>
+                        <span id="profile">Panuwat Duangkham</span>
                     </div>
 
                 </div>
@@ -197,7 +299,8 @@ https://templatemo.com/tm-529-ramayana
                                     </div>
 
                                     <div class="container-fluid">
-                                        <input type="text" name="add_id" class="form-control" placeholder="รหัสวัสดุ"><br>
+                                        <input type="text" name="add_id" class="form-control"
+                                            placeholder="รหัสวัสดุ"><br>
 
                                     </div>
 
@@ -207,8 +310,8 @@ https://templatemo.com/tm-529-ramayana
                                     </div>
 
                                     <div class="container-fluid">
-                                        <input type="number" name="add_amount" class="form-control" style="width: 250px;"
-                                            placeholder="จำนวนวัสดุ"><br>
+                                        <input type="number" name="add_amount" class="form-control"
+                                            style="width: 250px;" placeholder="จำนวนวัสดุ"><br>
                                     </div>
 
                                     <div class="container-fluid">
@@ -218,7 +321,7 @@ https://templatemo.com/tm-529-ramayana
                                     <div class="modal-footer">
                                         <button style="float: left;" type="submit" class="btn btn-success"
                                             id="btnAddConfirm">เพิ่มวัสดุ</button>
-                                            
+
                                         <button type="button" style="float: right;" class="btn btn-danger"
                                             data-dismiss="modal">ยกเลิก</button>
                                 </form>
@@ -231,6 +334,42 @@ https://templatemo.com/tm-529-ramayana
 
             </div>
             <br>
+
+            <!-- Modal Edit -->
+            <div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header ">
+                            <h2 class="col-12 modal-title text-center " id="exampleModalLongTitle">แก้ไขวัสดุ
+                            </h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                รหัสวัสดุ
+                                <input type="text" class="form-control mb-1" name="edit_id" id="product_id" >
+                                วันที่
+                                <input type="text" class="form-control mb-1" name="edit_date" id="addDate" >
+                                รายการวัสดุ
+                                <input type="text" class="form-control mb-1" name="edit_pro" id="name_pro" >
+                                จำนวนวัสดุ
+                                <input type="number" class="form-control mb-1" name="edit_amount" id="amount_pro" >
+                                หน่วยนับ
+                                <input type="text" class="form-control mb-1" name="edit_count" id="unit_pro" >
+                               
+                                   
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal"
+                                id="btnsaveEdit">ตกลง</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
             <table id="itemtable6" class="table table-striped table-bordered" style="width: 100%;">
@@ -333,6 +472,11 @@ https://templatemo.com/tm-529-ramayana
                                     transform="translate(-1 -3)" fill="#fff" />
                             </svg>
                             &nbsp; ประวัติการเบิก</a> </li>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <br>
                     <br>
                     <br>

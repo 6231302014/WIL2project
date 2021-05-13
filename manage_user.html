@@ -27,7 +27,7 @@
     <script src="local/logout.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <title>จัดการผู้ใช้</title>
@@ -47,7 +47,10 @@ https://templatemo.com/tm-529-ramayana
     <script>
         $(document).ready(function () {
             var manageTable;
-            manageTable = $("#itemtable7").dataTable({
+            manageTable = $("#itemtable7").DataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+                },
                 responsive: true,
                 ajax: {
                     url: '/manage',
@@ -67,6 +70,8 @@ https://templatemo.com/tm-529-ramayana
                                 json[row].role = "หัวหน้า";
                             } else if (json[row].role == 4) {
                                 json[row].role = "ซุปเปอร์แอดมิน";
+                            } else if (json[row].role == 0) {
+                                json[row].role = "ปิดการใช้งาน";
                             }
                         }
                         // return modifed table data
@@ -82,24 +87,28 @@ https://templatemo.com/tm-529-ramayana
                     { title: "ทำรายการ", orderable: false, defaultContent: "<center><button type='button' class='btn btn-warning '  data-toggle='modal' data-target='#editUser' id='btnEdit' >แก้ไข</button></center> " }
                 ],
 
-            })
+            });
+            EditAction();
 
             $("#btnAddUser").click(function () {
-                $("#modalAddUser").modal("toggle");
+                $("#modalAdd").modal("toggle");
                 $("input[name='add_fname']").val("");
                 $("input[name='add_lname']").val("");
                 $("input[name='add_email']").val("");
-                $("input[name='selectrole']").val("");
+                $("input[name='add_role']").val("");
             });
 
-            $("#formAddUser").submit(function (e) {
+
+
+            $("#formAdduser").submit(function (e) {
                 e.preventDefault();
-                const newAdduser = $("#formAddUser").serialize();
+                // const newAdditem = new FormData(this);
+                const newAddUser = $("#formAdduser").serialize();
 
                 $.ajax({
                     type: "POST",
                     url: "/adduser",
-                    data: newAdduser,
+                    data: newAddUser,
                 }).done(function (data, state, xhr) {
                     Swal.fire({
                         icon: "success",
@@ -107,11 +116,56 @@ https://templatemo.com/tm-529-ramayana
                         showCloseButton: true,
                         cancelButton: "Close",
                     })
-                    $("#modalAddUser").modal("toggle");
+                    $("#modalAdd").modal("toggle");
                     $("#itemtable7").DataTable().ajax.reload();
                 }).fail(function (xhr, state) {
                     Swal.fire(xhr.responseText);
                 });
+            });
+            //--------------------------------------------------------------------------------------------------------
+            ///Edit user
+            function EditAction() {
+                $('#itemtable7 tbody').on('click', '.btn-warning', function () {
+                    const currentRow = $(this).parents('tr');
+                    const selectedData = manageTable.row(currentRow).data();
+                    $("#F_name").val(selectedData.F_name).prop('disabled', true);
+                    $("#L_name").val(selectedData.L_name).prop('disabled', true);
+                    $("#email").val(selectedData.email).prop('disabled', true);
+                    $("#editdUser").modal("show");
+                    // $("input[name='edit_amount']").val("");
+                });
+            }
+
+            $("#btnsaveEdit").click(function () {
+                const email = $("#email").val();
+                const role = $("#role").val();
+                getNewrole();
+                $.ajax({
+                    method: "POST",
+                    url: "/manageedit",
+                    data: { role: role, email: email },
+                }).done(function (data, state, xhr) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "แก้ไขผู้ใช้สำเร็จ!!",
+                    })
+                    $("#itemtable7").DataTable().ajax.reload();
+                }).fail(function (xhr, state, error) {
+                    Swal.fire(xhr.responseText);
+                });
+            });
+
+            function getNewrole() {
+                const role = $("#role").val("");
+                const email = $("#email").val("");
+            }
+            //--------------------------------------------------------------------------------------------------------
+
+
+
+            $("#menusuper").click(function () {
+                window.location.replace("/manageuser");
+
             });
 
         });
@@ -161,7 +215,7 @@ https://templatemo.com/tm-529-ramayana
 
 
                 <!-- Modal -->
-                <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog"
+                <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -174,31 +228,34 @@ https://templatemo.com/tm-529-ramayana
                             </div>
                             <div class="modal-body container-fluid">
                                 <!-- Form Add item -->
-                                <form class="container-fluid" id="formAddUser">
+                                <form class="container-fluid" id="formAdduser">
                                     <div class="container-fluid">
-                                        <input type="text" name="add_fname" id="add_fname" class="form-control" placeholder="ชื่อ"><br>
+                                        <input type="text" name="add_fname" class="form-control" placeholder="ชื่อ"><br>
                                     </div>
 
                                     <div class="container-fluid">
-                                        <input type="text" name="add_lname" id="add_lname" class="form-control"placeholder="นามสกุล"><br>
-                                            
+                                        <input type="text" name="add_lname" class="form-control"
+                                            placeholder="นามสกุล"><br>
+
 
                                     </div>
 
                                     <div class="container-fluid">
-                                        <input type="text" name="add_email" id="add_enail" class="form-control"  placeholder="อีเมลล์">
-                                          <br>
+                                        <input type="text" name="add_email" class="form-control" placeholder="อีเมลล์">
+                                        <br>
                                     </div>
 
-                                    <div class="container-fluid" >
-                                     <select class="form-control" name="selectrole" id="selectrole1" style="width: 150px;">
+                                    <div class="container-fluid">
+                                        <select class="form-control" name="add_role" style="width: 150px;">
                                             <option value="1">แอดมิน</option>
                                             <option value="2">ผู้ใช้งาน</option>
                                             <option value="3">หัวหน้า</option>
                                             <option value="4">ซุปเปอร์แอดมิน</option>
                                         </select>
                                     </div>
-
+                                    <br>
+                                    <br>
+                                    <br>
 
                                     <div class="modal-footer">
                                         <button style="float: left;" type="submit" class="btn btn-success"
@@ -206,7 +263,7 @@ https://templatemo.com/tm-529-ramayana
 
                                         <button type="button" style="float: right;" class="btn btn-danger"
                                             data-dismiss="modal">ยกเลิก</button>
-                                            
+
                                 </form>
                             </div>
                         </div>
@@ -228,22 +285,26 @@ https://templatemo.com/tm-529-ramayana
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
+                                <!-- <ul>
+                                    <li> ชื่อผู้ใช้: <a id="edit_name"></a> <a id="edit_lname"></a></li> 
+                                    
+                                </ul> -->
                                 ชื่อ
-                                <input type="text" class="form-control mb-1" id="txtFirstnameE" disabled>
+                                <input type="text" class="form-control mb-1" id="F_name">
                                 นามสกุล
-                                <input type="text" class="form-control" id="txtLastnameE" disabled /><br>
+                                <input type="text" class="form-control mb-1" id="L_name">
                                 อีเมลล์
-                                <input type="text" class="form-control" id="txtEmailE" disabled /><br>
+                                <input type="text" class="form-control mb-1" id="email">
                             </div>
                             <div class="form-group">
                                 บทบาท
-                                <select class="form-control" id="selectrole" style="width: 200px; left: 400px;">
+                                <select class="form-control" id="role" style="width: 200px; left: 400px;">
+                                    <option></option>
+                                    <option value="0">ปิดการใช้งาน</option>
                                     <option value="1">แอดมิน</option>
                                     <option value="2">ผู้ใช้งาน</option>
                                     <option value="3">หัวหน้า</option>
                                     <option value="4">ซุปเปอร์แอดมิน</option>
-
-
                                 </select>
                             </div>
 
@@ -325,15 +386,15 @@ https://templatemo.com/tm-529-ramayana
             <!-- Menu -->
             <nav id="menu">
                 <ul>
-                    <li><a href="manage_user.html"><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24">
-                                <path id="Path_11385" data-name="Path 11385" d="M0,0H24V24H0Z" fill="none" />
-                                <path id="Path_11386" data-name="Path 11386"
-                                    d="M19,5V7H15V5h4M9,5v6H5V5H9m10,8v6H15V13h4M9,17v2H5V17H9M21,3H13V9h8ZM11,3H3V13h8Zm10,8H13V21h8ZM11,15H3v6h8Z"
-                                    fill="#fff" />
-                            </svg>
+                    <li id="menusuper"><a><svg id="outline-dashboard-24px" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24">
+                            <path id="Path_11385" data-name="Path 11385" d="M0,0H24V24H0Z" fill="none" />
+                            <path id="Path_11386" data-name="Path 11386"
+                                d="M19,5V7H15V5h4M9,5v6H5V5H9m10,8v6H15V13h4M9,17v2H5V17H9M21,3H13V9h8ZM11,3H3V13h8Zm10,8H13V21h8ZM11,15H3v6h8Z"
+                                fill="#fff" />
+                        </svg>
 
-                            &nbsp; จัดการผู้ใช้</a></li>
+                        &nbsp; จัดการผู้ใช้</a></li>
                     <hr>
 
                     <br>
@@ -367,6 +428,14 @@ https://templatemo.com/tm-529-ramayana
 
                 </ul>
             </nav>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <br>
             <br>
             <br>
