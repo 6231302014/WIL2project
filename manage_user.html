@@ -99,7 +99,6 @@ https://templatemo.com/tm-529-ramayana
             });
 
 
-
             $("#formAdduser").submit(function (e) {
                 e.preventDefault();
                 // const newAdditem = new FormData(this);
@@ -159,23 +158,15 @@ https://templatemo.com/tm-529-ramayana
                 const role = $("#role").val("");
                 const email = $("#email").val("");
             }
-            //--------------------------------------------------------------------------------------------------------
-        //   $.ajax({
-        //       type: "GET",
-        //       url: "/getuserinfo",
-        //       data: "",
-        //       success: function (response) {
-        //           console.log(response);
-        //           $("#showfname").text(resonpse[0].F_name);
-        //           $("#showlname").text(resonpse[0].L_name);
-        //       }
-        //   });
+   
 
 
             $("#menusuper").click(function () {
                 window.location.replace("/manageuser");
 
             });
+
+            $("#userName")[0].innerText = localStorage.getItem("userName")
 
         });
     </script>
@@ -207,7 +198,7 @@ https://templatemo.com/tm-529-ramayana
                                 class="fa fa-user-circle"></i></h1>
                     </div>
                     <div style="float: right;">
-                        <span></span><a id="showfname"></a>Panuwat Duangkham<a id="showlname"></a></span>
+                        <a id="userName"></a>
                     </div>
                 
 
@@ -302,7 +293,6 @@ https://templatemo.com/tm-529-ramayana
                             <div class="form-group">
                                 บทบาท
                                 <select class="form-control" id="role" style="width: 200px; left: 400px;">
-                                    <option></option>
                                     <option value="0">ปิดการใช้งาน</option>
                                     <option value="1">แอดมิน</option>
                                     <option value="2">ผู้ใช้งาน</option>

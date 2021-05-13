@@ -45,35 +45,41 @@ https://templatemo.com/tm-529-ramayana
 
   <script>
     $(document).ready(function () {
-      $.ajax({
-        type: "GET",
-        url: "/userhis",
-        dataType: "json",
-        success: function (data) {
+      var hisTable;
+            hisTable = $("#itemtable2").DataTable({
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+                },
+                responsive: true,
+                ajax: {
+                    url: '/userhis',
 
-          
+                    dataSrc: function (json) {
+                        // Modify some columns   
+                        for (let row = 0; row < json.length; row++) {
+                            // add new column 'number' and set its value
+                            json[row].number = row + 1;
+                        }
 
-          $("#itemtable2").dataTable({
-            data: data,
-            columns: [
-              
-              { 'data': 'requis_id' },
-              { 'data': 'requis_pickup' },
-              { 'data': 'product_id' },
-              { 'data': 'name_pro' },
-              { 'data': 'purpose' },
-              { 'data': 'requis_quantity' },
-              { 'data': 'unit_pro' },
-            ]
-          });
+                        return json;
+                    },
 
-       
+                },
+                columns: [
+                     {'data': 'number'},
+                    { 'data': 'requis_id' },
+                    { 'data': 'requis_pickup'},
+                    { 'data': 'requis_proid' },
+                    { 'data': 'requis_pro'},
+                    { 'data': 'purpose'},
+                    { 'data': 'requis_quantity'},
+                    { 'data': 'requis_count'},
+                    
 
-        }
-
+                ],
 
       });
-
+      $("#userName")[0].innerText = localStorage.getItem("userName")
 
       $("#menuuser1").click(function () {
         window.location.replace("/index");
@@ -127,7 +133,7 @@ https://templatemo.com/tm-529-ramayana
                       class="fa fa-user-circle"></i></h1>
           </div>
           <div style="float: right;">
-              <span>Panuwat Duangkham</span>
+            <a id="userName"></a>
           </div>
 
       </div>
@@ -144,6 +150,7 @@ https://templatemo.com/tm-529-ramayana
         <table id="itemtable2" style="width:100%">
           <thead>
             <tr>
+              <td>ลำดับ</td>
               <td>เลขที่การเบิก</td>
               <td>วันที่</td>
               <td>รหัสวัสดุ</td>

@@ -44,63 +44,6 @@ https://templatemo.com/tm-529-ramayana
   <link rel="stylesheet" href="css/templatemo-style.css">
   <link rel="stylesheet" href="css/owl.css">
 
-  <script>
-    $(document).ready(function () {
-      var invenTable;
-      invenTable = $("#itemtable6").dataTable({
-        language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
-                },
-        responsive: true,
-        ajax: {
-          url: '/inventory',
-
-          dataSrc: function (json) {
-             // Modify some columns   
-             for (let row = 0; row < json.length; row++) {
-                            // add new column 'number' and set its value
-                            json[row].number = row + 1;
-                        }
-
-
-            return json;
-          },
-        },
-        columns: [
-          { 'data': 'number', title: "ลำดับ" },
-          { 'data': 'product_id', title: "รหัสวัสดุ" },
-          { 'data': 'name_pro', title: "รายการวัสดุ" },
-          { 'data': 'amount_pro', title: "จำนวนวัสดุ" },
-          { 'data': 'unit_pro', title: "หน่วยนับ" },
-
-
-        ],
-
-      })
-
-      $("#menuuser1").click(function () {
-        window.location.replace("/index");
-
-      });
-      $("#menuuser2").click(function () {
-        window.location.replace("/userrequest");
-
-      });
-      $("#menuuser3").click(function () {
-        window.location.replace("/status");
-
-      });
-
-      $("#menuuser4").click(function () {
-        window.location.replace("/userrecord");
-
-      });
-
-
-    });
-  </script>
-
-
 </head>
 
 <body class="is-preload">
@@ -132,7 +75,7 @@ https://templatemo.com/tm-529-ramayana
                 class="fa fa-user-circle"></i></h1>
           </div>
           <div style="float: right;">
-            <span>Panuwat Duangkham</span>
+            <a id="userName">xxxx</a>
           </div>
 
           <br>
@@ -308,7 +251,59 @@ https://templatemo.com/tm-529-ramayana
 
     </div>
   </div>
+  <script>
+    $(document).ready(function () {
 
+      var invenTable;
+      invenTable = $("#itemtable6").dataTable({
+        language: {
+                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+                },
+        responsive: true,
+        ajax: {
+          url: '/inventory',
+
+          dataSrc: function (json) {
+             // Modify some columns   
+             for (let row = 0; row < json.length; row++) {
+                            // add new column 'number' and set its value
+                            json[row].number = row + 1;
+                        }
+
+
+            return json;
+          },
+        },
+        columns: [
+          { 'data': 'number', title: "ลำดับ" },
+          { 'data': 'product_id', title: "รหัสวัสดุ" },
+          { 'data': 'name_pro', title: "รายการวัสดุ" },
+          { 'data': 'amount_pro', title: "จำนวนวัสดุ" },
+          { 'data': 'unit_pro', title: "หน่วยนับ" },
+        ],
+
+      })
+      $("#menuuser1").click(function () {
+        window.location.replace("/index");
+      });
+      $("#userName")[0].innerText = localStorage.getItem("userName")
+      $("#menuuser2").click(function () {
+        window.location.replace("/userrequest");
+
+      });
+      $("#menuuser3").click(function () {
+        window.location.replace("/status");
+
+      });
+
+      $("#menuuser4").click(function () {
+        window.location.replace("/userrecord");
+
+      });
+
+
+    });
+  </script>
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="jquery/jquery.min.js"></script>

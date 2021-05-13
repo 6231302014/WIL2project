@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.6.1/sweetalert2.min.css">
+  <link rel="stylesheet" href="bgall.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -27,6 +28,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 
   <title>แจ้งเบิกวัสดุ</title>
 
@@ -44,6 +46,83 @@ https://templatemo.com/tm-529-ramayana
 
   <script>
     $(document).ready(function () {
+
+      var requisTable;
+      requisTable = $("#itemtable99").DataTable({
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+
+        },
+        responsive: true,
+        ajax: {
+          url: '/inventory',
+
+          dataSrc: function (json) {
+            // Modify some columns   
+            for (let row = 0; row < json.length; row++) {
+              // add new column 'number' and set its value
+              json[row].number = row + 1;
+            }
+
+            return json;
+          },
+
+        },
+        columns: [
+          { 'data': 'number', title: "ลำดับ" },
+          { 'data': 'product_id', title: "รหัสวัสดุ" },
+          { 'data': 'name_pro', title: "รายการวัสดุ" },
+          { 'data': 'amount_pro', title: "จำนวนวัสดุ" },
+          { 'data': 'unit_pro', title: "หน่วยนับ" },
+          { title: "เลือกรายการ ", orderable: false, defaultContent: "<center><button type='button' class='btn btn-info '  data-toggle='modal' data-target='#addRequest'  ><i class='fa fa-pencil-square-o'aria-hidden='true' ></i> เบิก</button></center> " }
+
+
+        ],
+
+      });
+      AddAction();
+
+      $("#btnsave").click(function () {
+        var payload =
+          $.ajax({
+            type: "POST",
+            url: "/requestitem",
+            data: {
+              requis_date: $("#request_date").val(),
+              requis_proid: $("#request_proid").val(),
+              requis_pro: $("#request_pro").val(),
+              requis_quantity: $("#request_quantity").val(),
+              purpose: $("#request_purpose").val(),
+            },
+          }).done(function (data, state, xhr) {
+            Swal.fire({
+              icon: "success",
+              title: "ดำเนินการสำเร็จ!!",
+              showCloseButton: true,
+              cancelButton: "Close",
+            })
+          }).fail(function (xhr, state) {
+            Swal.fire(xhr.responseText);
+          });
+      });
+
+
+
+
+
+      function AddAction() {
+        $('#itemtable99 tbody').on('click', '.btn-info', function () {
+          const currentRow = $(this).parents('tr');
+          const selectedData = requisTable.row(currentRow).data();
+          $("#request_pro").val(selectedData.name_pro).prop('disabled', true);
+          $("#request_proid").val(selectedData.product_id).prop('disabled', true);
+          // $("#addDate").val(selectedData.addDate).prop('disabled', true);
+          $("#addRequest").modal("show");
+          // $("input[name='edit_amount']").val("");
+        });
+      }
+
+      $("#userName")[0].innerText = localStorage.getItem("userName")
 
       $("#menuuser1").click(function () {
         window.location.replace("/index");
@@ -65,21 +144,7 @@ https://templatemo.com/tm-529-ramayana
 
     });
   </script>
-  <style>
-    .column {
-      float: left;
-      width: 50%;
-      padding: 10px;
-      height: 300px;
-      /* Should be removed. Only for demonstration */
-    }
 
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-  </style>
 
 </head>
 
@@ -101,12 +166,10 @@ https://templatemo.com/tm-529-ramayana
 
         <div>
           <div>
-            <h1>
-              <i class="fa fa-user-circle" style="width: 100%; margin-left: 1175px;"></i>
-            </h1>
+            <h1> <i class="fa fa-user-circle" style="color: black; margin-left: 1150px; "></i></h1>
           </div>
-          <div style="width: 100%; margin-left: 1110px;">
-            <span>Panuwat Duangkham</span>
+          <div style="color: black; margin-left: 1100px; ">
+            <a id="userName"></a>
           </div>
 
         </div>
@@ -114,119 +177,56 @@ https://templatemo.com/tm-529-ramayana
         <br>
         <br>
         <center>
-          <h1>แบบฟอร์มเเจ้งเบิกวัสดุ</h1>
+          <h1 style="color: black;">แบบฟอร์มเเจ้งเบิกวัสดุ</h1>
         </center>
         <center>
           <p style="font-size: 30px; color: black;">สำนักงานวิชาเทคโนโลยีสารสนเทศ</p>
         </center>
+
+
+
         <br>
         <br>
+        <table id="itemtable99" style="width:100%"> </table>
 
-
-        <div class="form-control" style="height: 100%; width: 100%;">
-          <div class="card-body">&nbsp;&nbsp;&nbsp;&nbsp;วันที่ &nbsp; <input type="date" style="width: 200px;"
-              class="form-control"> <br>&nbsp;&nbsp;&nbsp;&nbsp;
-            รายการวัสดุ &nbsp;&nbsp;
-
-            <select style="width: 600px;" class="form-control">
-              <option value="0">รายการวัสดุทั้งหมด</option>
-              <option value="1" selected>วัสดุสำนักงาน</option>
-              <option value="2">วัสดุไฟฟ้าวิทยุ</option>
-              <option value="3">วัสดุคอมพิวเตอร์</option>
-              <option value="4">วัสดุงานบ้านงานครัว</option>
-              <option value="5">วัสดุเครื่องแต่งกาย</option>
-              <option value="6">วัสดุของที่ระลึก</option>
-            </select><br>
-
-            &nbsp;&nbsp;&nbsp;&nbsp; รายการ &nbsp;&nbsp;&nbsp; <input class="form-control" type="text"
-              style="width: 600px;"><br>
-            &nbsp;&nbsp;&nbsp; จำนวน &nbsp;&nbsp;&nbsp; <input class="form-control" style="width: 600px;"
-              type="number">&nbsp;&nbsp;&nbsp;<br>
-            &nbsp;&nbsp;&nbsp; หน่วยนับ &nbsp;&nbsp;&nbsp; <input style="width: 600px;" class="form-control"
-              type="text"><br>
-            &nbsp;&nbsp;&nbsp; วัตถุประสงค์ &nbsp;&nbsp;&nbsp; <input class="form-control" type="text"
-              style="width: 600px; height: 300px;"> <br>
-              <div class="row">
-                <div class="column" style="background-color:#bbb;">
-                  <h2>Column 2</h2>
-                  <p>Some text..</p>
-                </div>
-              </div>
-            <button type="button" class="btn btn-success btn-lg float-right">ส่ง</button>
-            <br>
-            <br>
-          </div>
-
-
-
-
-        </div>
-        <!-- Table Request -->
-        <!-- <center> -->
-        <!-- <hr>
-
-        <label class="mb-2 mr-sm-2" style="color: black; font-size: 25px;">วันที่</label>
-        <input type="date" class="form-control" style="width: 210px;">
-        <br>
-        <label class="mb-2 mr-sm-2" style="color: black; font-size: 25px;"> หมวดหมู่</label>
-        <select id="group" class="form-control" style="color: black; width: 210px;">
-          <br>
-          <option value="วัสดุทั้งหมด">วัสดุทั้งหมด</option>
-          <option value="วัสดุสำนักงาน">วัสดุสำนักงาน</option>
-          <option value="วัสดุไฟฟ้าวิทยุ">วัสดุไฟฟ้าวิทยุ</option>
-          <option value="วัสดุคอมพิวเตอร์">วัสดุคอมพิวเตอร์</option>
-          <option value="วัสดุงานบ้านงานครัว">วัสดุงานบ้านงานครัว</option>
-          <option value="วัสดุเครื่องเเต่งกาย">วัสดุเครื่องเเต่งกาย</option>
-          <option value="วัสดุของที่ระลึก">วัสดุของที่ระลึก</option>
-
-        </select>
-        <br>
-        <label class="mb-2 mr-sm-2" style="color: black; font-size: 25px;">รายการ</label>
-        <input type="text" class="form-control" style="width: 450px;"><br>
-        <label class="mb-2 mr-sm-2" style="color: black; font-size: 25px;">หน่วยนับ</label>
-        <input type="text" class="form-control" id="amount" style="width: 150px;"><br>
-        <label class="mb-2 mr-sm-2" style="color: black; font-size: 25px;">วัตถุประสงค์</label>
-        <input type="text" class="form-control" id="amount" style="width: 600px;height: 200px;">
-
-        <div id="textbox">
-
-          <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#sent">ส่ง</button>
-        </div> -->
-
-        <!--Modal Sent-->
-        <!-- <div class="modal fade" id="sent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!--Modal Request-->
+        <div class="modal fade" id="addRequest" tabindex="-1" role="dialog" aria-labelledby="examleModalCenterTitle"
+          aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLongTitle">ยืนยันรายการแจ้งเบิก</h2>
-                <button type="button" class="close" data-dismiss = "modal" aria-label="Close">
-                  <span aria-hidden="true"></span>
+                <h2 class="col-12 modal-title text-center" id="exampleModalLongTitle">รายการคำขอ</h2>
+
+              </div>
+              <div class="modal-body">
+                <div class="form-group" id="requestitem">
+                  วันที่
+                  <input type="date" class="form-control mb-1" id="request_date">
+                  รหัสวัสดุ
+                  <input type="text" class="form-control mb-1" id="request_proid">
+                  รายการวัสดุ
+                  <input type="text" class="form-control mb-1" id="request_pro">
+                  จำนวน
+                  <input type="number" min="0" class="form-control mb-1" id="request_quantity">
+                  หมายเหตุ
+                  <textarea class="form-control" id="request_purpose" rows="5"></textarea>
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="submit" style="float: right;" class="btn btn-info" data-dismiss="modal" id="btnsave">
+                  ทำการเบิก
+                </button>
+                <button type="button" style="float: right;" class="btn btn-danger" data-dismiss="modal">
+                  ยกเลิก
                 </button>
               </div>
-
-              <div class="modal-footer">
-                <button type="button" id="accept" class="btn btn-success sweet-3">ตกลง</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-
-              </div>
-
             </div>
-
           </div>
         </div>
-
-         -->
-
-
-
-        <!-- </center> -->
-
-
-        <!-- <table id="itemtable6" class="table table-striped table-bordered" style="width: 100%;">
-
-        </table> -->
-
       </div>
+
     </div>
 
 

@@ -76,10 +76,9 @@ https://templatemo.com/tm-529-ramayana
                 columns: [
                     { 'data': 'number', title: "ลำดับ" },
                     { 'data': 'requis_pickup', title: "วันที่" },
-                    { 'data': 'requis_pro', title: "รหัสวัสดุ" },
-                    { 'data': 'name_pro', title: "ชื่อวัสดุ" },
-                    { 'data': 'requis_quantity', title: "จำนวน" },
-                    { 'data': 'unit_pro', title: "หน่วยนับ" },
+                    { 'data': 'product_id', title: "รหัสวัสดุ" },
+                    { 'data': 'requis_pro', title: "ชื่อวัสดุ" },
+                    { 'data': 'requis_quantity', title: "จำนวน" }
                 ],columnDefs: [
                     // make the last column align right, also target: "_all"
                     { "className": "dt-center", "targets": 4 }
@@ -87,8 +86,9 @@ https://templatemo.com/tm-529-ramayana
 
             });
 
+            $("#userName")[0].innerText = localStorage.getItem("userName")
 
-      const json = '[{"year":"2564","data":[70,69,95,145,184,215,252,265,233,183,139,96]},{"year":"2019","data":[170,69,95,145,184,215,252,265,233,183,139,196]},{"year":"2018","data":[69,95,145,184,215,252,265,233,183,139,196,10]},{"year":"2017","data":[70,69,95,145,184,215,252,265,233,183,0,0]}]';
+      const json = '[{"year":"2564","data":[87,69,95,145,184,215,252,265,233,183,139,96]},{"year":"2563","data":[170,69,95,145,184,215,252,265,233,183,139,196]},{"year":"2018","data":[69,95,145,184,215,252,265,233,183,139,196,10]},{"year":"2017","data":[70,69,95,145,184,215,252,265,233,183,0,0]}]';
 
       const visitors = JSON.parse(json);
 
@@ -134,16 +134,16 @@ https://templatemo.com/tm-529-ramayana
           });
 
         }
-        else if (yeardata == "19data") {
+        else if (yeardata == "2563") {
 
           var mychart = Highcharts.chart("mychart", {
             chart: { type: 'column' },
-            title: { text: 'Visiting Statistics' },
-            subtitle: { text: 'Website Visiting Number' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำปี' },
             xAxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+              categories: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม ', 'พฤศจิกายน', 'ธันวาคม']
             },
-            yAxis: { title: { text: 'Visiting Number' } },
+            yAxis: { title: { text:  'จำนวนวัสดุที่ทำการเบิก' } },
             plotOptions: {
               line: {
                 dataLabels: { enabled: true },
@@ -248,7 +248,7 @@ https://templatemo.com/tm-529-ramayana
                 class="fa fa-user-circle"></i></h1>
           </div>
           <div style="float: right;">
-            <span>Panuwat Duangkham</span>
+            <a id="userName"></a>
           </div>
 
         </div>

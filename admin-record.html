@@ -90,6 +90,7 @@ https://templatemo.com/tm-529-ramayana
                 window.location.replace("/adminrecord");
 
             });
+            $("#userName")[0].innerText = localStorage.getItem("userName")
 
         });
     </script>
@@ -124,7 +125,7 @@ https://templatemo.com/tm-529-ramayana
                                 class="fa fa-user-circle"></i></h1>
                     </div>
                     <div style="float: right;">
-                        <span>Panuwat Duangkham</span>
+                        <a id="userName"></a>
                     </div>
 
                 </div>

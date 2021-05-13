@@ -129,6 +129,24 @@ app.get("/users", function (req, res) {
     });
 });
 
+app.post("/requestitem", (req, res) => {
+    let sql = "INSERT INTO requisition (requis_date,requis_proid,requis_pro,requis_quantity,purpose) VALUES ?";
+    let test = [[req.body.requis_date, req.body.requis_proid, req.body.requis_pro, req.body.requis_quantity, req.body.purpose]];
+    con.query(sql, [test], function (err, result) {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Database server error.");
+        } else {
+            if (result.affectedRows == 1) {
+                res.send("คำขอเบิกสำเร็จ");
+            } else {
+                res.status(501).send("คำขอเบิกไม่สำเร็จ");
+            }
+        }
+    });
+});
+
+
 app.get("/indexitem", function (req, res) {
     const sql = "SELECT product_no,product_id,name_pro,amount_pro,unit_pro FROM product";
     con.query(sql, function (err, result, fields) {
@@ -151,7 +169,8 @@ app.get("/indexitem", function (req, res) {
 });
 
 app.get("/userhis", function (req, res) {
-    const sql = "SELECT requis_id,requis_pickup,product_id,name_pro,purpose,requis_quantity,unit_pro FROM requisition INNER JOIN product ON requis_id = product_no";
+    //console.log(res);
+    const sql = "SELECT requis_id,requis_pickup,requis_proid,requis_pro,purpose,requis_quantity,requis_count FROM requisition";
     con.query(sql, function (err, result, fields) {
         if (err) {
             console.error(err.message);
@@ -181,7 +200,8 @@ app.get("/userhis", function (req, res) {
 });
 
 app.get("/adminreq", function (req, res) {
-    const sql = "SELECT requis_date, requis_id, F_name, L_name, email, requis_status FROM requisition INNER JOIN user ON requis_id = User_id";
+    //console.log(req);
+    const sql = "SELECT  requis_date, requis_id, F_name, L_name, requis_proid,requis_pro,requis_quantity,requis_count, requis_status FROM requisition INNER JOIN user ON requis_id = User_id "; // ?
     con.query(sql, function (err, result, fields) {
         if (err) {
             console.error(err.message);
@@ -207,6 +227,55 @@ app.get("/adminreq", function (req, res) {
         }
     });
 });
+app.post("/adminapp", function (req, res) {
+    const requis_proid = req.body.requis_proid;
+    // console.log(requis_proid);
+    const requis_status = req.body.requis_status;
+    const requis_quantity = req.body.requis_quantity;
+    const sql = "UPDATE product SET requis_quantity = ?, requis_status = 1 WHERE requis_proid = ?";
+    con.query(sql, [requis_quantity,requis_status,requis_proid,], function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.status(500).end("Server error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
+
+app.get("/moreinfo", function (req, res) {
+   // console.log(req);
+    const sql = "SELECT  requis_proid,requis_pro,requis_quantity,requis_count,purpose FROM requisition"; // ?
+    con.query(sql, function (err, result, fields) {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+            return;
+        }
+        const numrows = result.length;
+        //if no data
+        if (numrows == 0) {
+            res.status(500).send("No data");
+        }
+        else {
+            let i;
+            for (i = 0; i < result.length; i++) {
+                let d = new Date(result[i].requis_date);
+                let Year = d.getFullYear();
+                let Month = d.getMonth() + 1;
+                let date = d.getDate();
+                result[i].requis_date = date + '/' + Month + '/' + Year;
+            }
+            //return json of recordset
+            res.json(result);
+        }
+    });
+});
+
+
+
 
 //------------ Inventory -------------
 app.get("/inventory", function (req, res) {
@@ -238,7 +307,7 @@ app.get("/inventory", function (req, res) {
     });
 });
 app.post("/additem", (req, res) => {
-     //console.log(req.body);
+    //console.log(req.body);
     const addDate = req.body.add_date;
     const product_id = req.body.add_id;
     const name_pro = req.body.add_name;
@@ -286,18 +355,18 @@ app.post("/manageedit", function (req, res) {
     const email = req.body.email;
     const role = req.body.role;
     const sql = "UPDATE user SET role = ? WHERE email = ?";
-    con.query(sql, [role,email], function (err, result, fields) {
+    con.query(sql, [role, email], function (err, result, fields) {
         if (err) {
             console.log(err);
             res.status(500).end("Server error");
-        }  
+        }
         const numrows = result.length;
         //if no data
         if (numrows == 0) {
             res.status(500).send("No data");
         }
-        else{
-             res.send(result);
+        else {
+            res.send(result);
         }
     });
 });
@@ -332,12 +401,12 @@ app.post("/itemedit", function (req, res) {
     const product_id = req.body.product_id;
     const amount_pro = req.body.amount_pro;
     const sql = "UPDATE product SET amount_pro = ? WHERE product_id = ?";
-    con.query(sql, [amount_pro,product_id], function (err, result, fields) {
+    con.query(sql, [amount_pro, product_id], function (err, result, fields) {
         if (err) {
             console.log(err);
             res.status(500).end("Server error");
-        }else{
-             res.send(result);
+        } else {
+            res.send(result);
         }
     });
 });
@@ -352,12 +421,12 @@ app.delete("/inven/:product_id", function (req, res) {
             console.error(err.message);
             res.status(500).send("Server error");
             return;
-        }           
-        
+        }
+
         // get deleted rows
         // console.log('Row deleted:' + result.affectedRows);
         const numrows = result.affectedRows;
-        if(numrows != 1) {
+        if (numrows != 1) {
             res.status(500).send("Delete failed");
         }
         else {
@@ -367,7 +436,7 @@ app.delete("/inven/:product_id", function (req, res) {
 });
 //---------------- stat ---------------------------------
 app.get("/statitem", function (req, res) {
-    const sql = "SELECT requis_pickup, requis_pro,name_pro, requis_quantity, unit_pro, requis_status FROM requisition INNER JOIN product ON requis_id = product_no WHERE requis_pro = product_id AND requis_status = 2";
+    const sql = "SELECT requis_pickup,product_id ,requis_pro, requis_quantity, requis_status FROM requisition INNER JOIN product ON requis_id = product_no WHERE  requis_status = 2";
     con.query(sql, function (err, result, fields) {
         if (err) {
             console.error(err.message);
@@ -394,26 +463,7 @@ app.get("/statitem", function (req, res) {
         }
     });
 });
-//--------------------- get userinfo ---------------------------------------
-// app.get("/getuserinfo", function (req, res) {
-//     const sql = "SELECT F_name,L_name FROM user WHERE User_id = 2";
-//     con.query(sql, function (err, result, fields) {
-//         if (err) {
-//             console.error(err.message);
-//             res.status(500).send("Server Error");
-//             return;
-//         }
-//         const numrows = result.length;
-//         //if no data
-//         if (numrows == 0) {
-//             res.status(500).send("No data");
-//         }
-//         else {
-//             //return json of recordset
-//             res.json(result);
-//         }
-//     });
-// });
+
 
 // =============== Other routes ==================
 const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -428,7 +478,7 @@ app.post('/verifyUser', (req, res) => {
             //    console.log(payload);
             const email = payload.email;
             // TODO: verrify user with DB
-            const sql = 'SELECT  User_id , role FROM user WHERE email = ?';
+            const sql = 'SELECT * FROM user WHERE email = ?';
             con.query(sql, [email], (err, result) => {
                 if (err) {
                     console.log(err);
@@ -446,15 +496,8 @@ app.post('/verifyUser', (req, res) => {
 
                 //save user data to session 
                 req.session.user = { 'username': payload.name, 'User_id': result[0].User_id, 'role': result[0].role };
-                if (result[0].role == 2) {
-                    res.send('/index');
-                } else if (result[0].role == 1) {
-                    res.send('/adminrequest')
-                } else if (result[0].role == 3) {
-                    res.send('/leaderstats')
-                } else if (result[0].role == 4) {
-                    res.send('/manageuser')
-                }
+                res.status(200).json(result[0]);
+
             });
 
         }).catch((err) => {

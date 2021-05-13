@@ -192,6 +192,7 @@ https://templatemo.com/tm-529-ramayana
                 });
             });
         }
+        $("#userName")[0].innerText = localStorage.getItem("userName")
 
         // -------- Delete user ---------
         function deleteUser(row, product_id) {
@@ -206,10 +207,6 @@ https://templatemo.com/tm-529-ramayana
                 alert(xhr.responseText);
             });
         }
-
- 
-   
-
               // link page
             $("#menuadmin1").click(function () {
                 window.location.replace("/adminrequest");
@@ -262,7 +259,7 @@ https://templatemo.com/tm-529-ramayana
                                 class="fa fa-user-circle"></i></h1>
                     </div>
                     <div style="float: right;">
-                        <span id="profile">Panuwat Duangkham</span>
+                        <a id="userName"></a>
                     </div>
 
                 </div>
@@ -310,7 +307,7 @@ https://templatemo.com/tm-529-ramayana
                                     </div>
 
                                     <div class="container-fluid">
-                                        <input type="number" name="add_amount" class="form-control"
+                                        <input type="number" min="0" name="add_amount" class="form-control"
                                             style="width: 250px;" placeholder="จำนวนวัสดุ"><br>
                                     </div>
 
@@ -353,7 +350,7 @@ https://templatemo.com/tm-529-ramayana
                                 รายการวัสดุ
                                 <input type="text" class="form-control mb-1" name="edit_pro" id="name_pro" >
                                 จำนวนวัสดุ
-                                <input type="number" class="form-control mb-1" name="edit_amount" id="amount_pro" >
+                                <input type="number" min="0" class="form-control mb-1" name="edit_amount" id="amount_pro" >
                                 หน่วยนับ
                                 <input type="text" class="form-control mb-1" name="edit_count" id="unit_pro" >
                                
