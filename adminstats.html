@@ -36,7 +36,7 @@
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
 
-  <link rel="stylesheet" href="bgall.css">
+  <!-- <link rel="stylesheet" href="bgall.css"> -->
 
   <title>สถิติการเบิก</title>
 
@@ -55,43 +55,330 @@ https://templatemo.com/tm-529-ramayana
   <script>
     $(document).ready(function () {
       var statTable;
-            statTable = $("#stattable1").DataTable({
-                language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
-                },
-                responsive: true,
-                ajax: {
-                    url: '/statitem',
-                    dataSrc: function (json) {
-                        // Modify some columns   
-                        for (let row = 0; row < json.length; row++) {
-                            // add new column 'number' and set its value
-                            json[row].number = row + 1;
-                      
-                        }
-                        // return modifed table data
-                        return json;
-                    },
-                },
-                columns: [
-                    { 'data': 'number', title: "ลำดับ" },
-                    { 'data': 'requis_pickup', title: "วันที่" },
-                    { 'data': 'product_id', title: "รหัสวัสดุ" },
-                    { 'data': 'requis_pro', title: "ชื่อวัสดุ" },
-                    { 'data': 'requis_quantity', title: "จำนวน" }
-                ],columnDefs: [
-                    // make the last column align right, also target: "_all"
-                    { "className": "dt-center", "targets": 4 }
-                ]
+      statTable = $("#stattable1").DataTable({
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+        },
+        responsive: true,
+        ajax: {
+          url: '/statitem',
+          dataSrc: function (json) {
+            // Modify some columns   
+            for (let row = 0; row < json.length; row++) {
+              // add new column 'number' and set its value
+              json[row].number = row + 1;
 
-            });
+            }
+            // return modifed table data
+            return json;
+          },
+        },
+        columns: [
+        { 'data': 'number', title: "ลำดับ" },
+          { 'data': 'requis_pickup', title: "วันที่" },
+          { 'data': 'requis_proid', title: "รหัสวัสดุ" },
+          { 'data': 'requis_pro', title: "ชื่อวัสดุ" },
+          { 'data': 'requis_quantity', title: "จำนวน" },
+          { 'data': 'unit_pro', title: "หน่วยนับ" },
+        ], columnDefs: [
+          // make the last column align right, also target: "_all"
+          { "className": "dt-center", "targets": 4 }
+        ]
 
-            $("#userName")[0].innerText = localStorage.getItem("userName")
+      });
 
-      const json = '[{"year":"2564","data":[87,69,95,145,184,215,252,265,233,183,139,96]},{"year":"2563","data":[170,69,95,145,184,215,252,265,233,183,139,196]},{"year":"2018","data":[69,95,145,184,215,252,265,233,183,139,196,10]},{"year":"2017","data":[70,69,95,145,184,215,252,265,233,183,0,0]}]';
+
+      const json = '[{"year":"2564","data":[0,0,0,0,30,0,0,0,0,0,0,0]},{"year":"2563","data":[0,0,0,0,0,0,0,0,0,0,0,0]},{"month":"January","data":[30]},{"month":"May","data":[50]},{"month":"February","data":[0]},{"month":"March","data":[0]},{"month":"April","data":[0]},{"month":"June","data":[0]},{"month":"July","data":[0]},{"month":"August","data":[0]},{"month":"September","data":[0]},{"month":"October","data":[0]},{"month":"November","data":[0]},{"month":"December","data":[0]}]';
 
       const visitors = JSON.parse(json);
 
+
+      var mychart = Highcharts.chart("mychart", {
+        chart: { type: 'column' },
+        title: { text: 'สถิติการเบิก' },
+        subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+        xAxis: {
+          categories: ['มกราคม']
+        },
+        yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+        plotOptions: {
+          line: {
+            dataLabels: { enabled: true },
+            enableMouseTracking: true
+          }
+        },
+
+        series: [{ name: visitors[2].month, data: visitors[2].data }]
+
+      });
+      $("#months").on('change', function () {
+        var monthdata = $("#months").val();
+        if (monthdata == "jan") {
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['มกราคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[2].month, data: visitors[2].data }]
+
+          });
+
+        }
+        else if (monthdata == "may") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['พฤษภาคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[3].month, data: visitors[3].data }]
+
+          });
+
+        }
+        else if (monthdata == "feb") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['กุมภาพันธ์']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[4].month, data: visitors[4].data }]
+
+          });
+
+        }
+        else if (monthdata == "mar") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['มีนาคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[5].month, data: visitors[5].data }]
+
+          });
+
+        }
+        else if (monthdata == "apr") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['เมษายน']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[6].month, data: visitors[6].data }]
+
+          });
+
+        }
+        else if (monthdata == "jun") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['มิถุนายน']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[7].month, data: visitors[7].data }]
+
+          });
+
+        }
+        else if (monthdata == "jul") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['กรกฎาคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[8].month, data: visitors[8].data }]
+
+          });
+
+        }
+        else if (monthdata == "aug") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['สิงหาคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[9].month, data: visitors[9].data }]
+
+          });
+
+        }
+        else if (monthdata == "sep") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['กันยายน']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[10].month, data: visitors[10].data }]
+
+          });
+
+        }
+        else if (monthdata == "oct") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['ตุลาคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[11].month, data: visitors[11].data }]
+
+          });
+
+        }
+        else if (monthdata == "nov") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['พฤศจิกายน']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[12].month, data: visitors[12].data }]
+
+          });
+
+        }
+        else if (monthdata == "dec") {
+
+          var mychart = Highcharts.chart("mychart", {
+            chart: { type: 'column' },
+            title: { text: 'สถิติการเบิก' },
+            subtitle: { text: 'สถิติการเบิกประจำเดือน' },
+            xAxis: {
+              categories: ['ธันวาคม']
+            },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
+            plotOptions: {
+              line: {
+                dataLabels: { enabled: true },
+                enableMouseTracking: true
+              }
+            },
+
+            series: [{ name: visitors[13].month, data: visitors[13].data }]
+
+          });
+
+        }
+
+
+      });
       var mychart = Highcharts.chart("mychart", {
         chart: { type: 'column' },
         title: { text: 'สถิติการเบิก' },
@@ -113,7 +400,7 @@ https://templatemo.com/tm-529-ramayana
 
       $("#years").on('change', function () {
         var yeardata = $("#years").val();
-        if (yeardata == "2564" || yeardata == '') {
+        if (yeardata == "2564") {
           var mychart = Highcharts.chart("mychart", {
             chart: { type: 'column' },
             title: { text: 'สถิติการเบิก' },
@@ -143,7 +430,7 @@ https://templatemo.com/tm-529-ramayana
             xAxis: {
               categories: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม ', 'พฤศจิกายน', 'ธันวาคม']
             },
-            yAxis: { title: { text:  'จำนวนวัสดุที่ทำการเบิก' } },
+            yAxis: { title: { text: 'จำนวนวัสดุที่ทำการเบิก' } },
             plotOptions: {
               line: {
                 dataLabels: { enabled: true },
@@ -155,49 +442,8 @@ https://templatemo.com/tm-529-ramayana
 
           });
 
-        } else if (yeardata == "18data") {
-          var mychart = Highcharts.chart("mychart", {
-            chart: { type: 'line' },
-            title: { text: 'Visiting Statistics' },
-            subtitle: { text: 'Website Visiting Number' },
-            xAxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yAxis: { title: { text: 'Visiting Number' } },
-            plotOptions: {
-              line: {
-                dataLabels: { enabled: true },
-                enableMouseTracking: true
-              }
-            },
-
-            series: [{ name: visitors[2].year, data: visitors[2].data }]
-
-          });
-
-        } else if (yeardata == "17data") {
-          var mychart = Highcharts.chart("mychart", {
-            chart: { type: 'line' },
-            title: { text: 'Visiting Statistics' },
-            subtitle: { text: 'Website Visiting Number' },
-            xAxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yAxis: { title: { text: 'Visiting Number' } },
-            plotOptions: {
-              line: {
-                dataLabels: { enabled: true },
-                enableMouseTracking: true
-              }
-            },
-
-            series: [{ name: visitors[3].year, data: visitors[3].data }]
-
-          });
-
         }
       });
-
       //------------- Link page ------------------
       $("#menuadmin1").click(function () {
         window.location.replace("/adminrequest");
@@ -215,13 +461,14 @@ https://templatemo.com/tm-529-ramayana
         window.location.replace("/adminrecord");
 
       });
+      $("#userName")[0].innerText = localStorage.getItem("userName")
     });
   </script>
 
 
 </head>
 
-<body class="is-preload" style="background-color: whitesmoke">
+<body class="is-preload" style="background-color: #f2f2ef;">
 
   <!-- Wrapper -->
   <div id="wrapper">
@@ -265,12 +512,20 @@ https://templatemo.com/tm-529-ramayana
             <div class="row">
               <div class="col-md-12">
                 <h1 style="color: black">สถิติการเบิก</h1>
-                <select id="month">
+                <select id="months">
                   <option value="select_month">กรุณาเลือกเดือน</option>
                   <option value="jan">มกราคม</option>
                   <option value="feb">กุมภาพันธ์</option>
-                  <option value="march">มีนาคม</option>
-                  <option value="april">เมษายน</option>
+                  <option value="mar">มีนาคม</option>
+                  <option value="apr">เมษายน</option>
+                  <option value="may">พฤษภาคม</option>
+                  <option value="jun">มิถุนายน</option>
+                  <option value="jul">กรกฎาคม</option>
+                  <option value="aug">สิงหาคม</option>
+                  <option value="sep">กันยายน</option>
+                  <option value="oct">ตุลาคม</option>
+                  <option value="nov">พฤศจิกายน</option>
+                  <option value="dec">ธันวาคม</option>
                 </select>&nbsp;&nbsp;
                 <select id="years">
                   <option value="select_year">กรุณาเลือกปี</option>
@@ -278,7 +533,7 @@ https://templatemo.com/tm-529-ramayana
                   <option value="2563">2563</option>
                   <option value="2562">2562</option>
                   <option value="2561">2561</option>
-                  <option value="2560">2560</option>
+
                 </select>
 
 
@@ -491,3 +746,4 @@ https://templatemo.com/tm-529-ramayana
 </body>
 
 </html>
+

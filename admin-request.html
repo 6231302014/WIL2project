@@ -27,7 +27,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-    <link rel="stylesheet" href="bgall.css">
+    <!-- <link rel="stylesheet" href="bgall.css"> -->
     <title>คำขอเบิก</title>
 
 
@@ -111,11 +111,12 @@ https://templatemo.com/tm-529-ramayana
                 $('#itemtable3 tbody').on('click', '.btn-info', function () {
                     const currentRow = $(this).parents('tr');
                     const selectedData = requisTable.row(currentRow).data();
+                    $("#request_count").val(selectedData.requis_count).prop('disabled',true);
                     $("#moreinfodate").val(selectedData.requis_date).prop('disabled', true);
-                    $("#requis_proid").val(selectedData.requis_proid).prop('disabled', true);
-                    $("#moreinfopro").val(selectedData.requis_pro).prop('disabled', true);
+                    $("#request_proid").val(selectedData.requis_proid).prop('disabled', true);
+                    $("#request_pro").val(selectedData.requis_pro).prop('disabled',true);
                     $("#requis_quantity").val(selectedData.requis_quantity).prop();
-                    $("#requis_count").val(selectedData.requis_count).prop('disabled', true);
+                  
 
                 });
             }
@@ -173,7 +174,7 @@ https://templatemo.com/tm-529-ramayana
     </script>
 </head>
 
-<body class="is-preload" style="background-color: whitesmoke;">
+<body class="is-preload" style="background-color: #f2f2ef;">
     <!-- Wrapper -->
     <div id="wrapper">
         <!-- Main -->
@@ -225,20 +226,20 @@ https://templatemo.com/tm-529-ramayana
                                             placeholder="วันที่"><br>
                                     </div>
                                     <div class="container-fluid">
-                                        <input type="text" id="requis_proid" class="form-control"
-                                            placeholder="รหัสวัสดุ" disabled><br>
+                                        <input type="text" id="request_proid" class="form-control"
+                                            placeholder="รหัสวัสดุ" ><br>
                                     </div>
                                     <div class="container-fluid">
-                                        <input type="text" id="moreinfopro" class="form-control" placeholder="ชื่อวัสดุ"
-                                            disabled><br>
+                                        <input type="text" id="request_pro" class="form-control" placeholder="ชื่อวัสดุ"
+                                            ><br>
                                     </div>
                                     <div class="container-fluid">
                                         <input type="number" id="requis_quantity" min="0" class="form-control"
                                             style="width: 250px;" placeholder="จำนวนวัสดุ"><br>
                                     </div>
                                     <div class="container-fluid">
-                                        <input type="text" id="requis_count" class="form-control"
-                                            placeholder="หน่วยนับ" disabled><br>
+                                        <input type="text" id="request_count" class="form-control"
+                                            placeholder="หน่วยนับ"><br>
                                     </div>
                                     <div class="container-fluid">
                                         <input type="text" id="purpose" class="form-control" placeholder="หมายเหตุ"

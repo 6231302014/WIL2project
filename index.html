@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-  <link rel="stylesheet" href="bgall.css">
+  <!-- <link rel="stylesheet" href="bgall.css"> -->
   <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
@@ -25,6 +25,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.6.1/sweetalert2.min.js"></script>
   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
   <script src="local/logout.js"></script>
+  <!-- <link rel="stylesheet" href="bgall.css"> -->
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -46,7 +47,7 @@ https://templatemo.com/tm-529-ramayana
 
 </head>
 
-<body class="is-preload">
+<body class="is-preload" style="background-color: #f2f2ef;">
 
   <!-- Wrapper -->
   <div id="wrapper">
@@ -67,15 +68,11 @@ https://templatemo.com/tm-529-ramayana
         <div>
           <div>
             <h1>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                class="fa fa-user-circle"></i></h1>
+              <i  style="color: black; margin-left: 1170px;" class="fa fa-user-circle"></i>
+            </h1>
           </div>
           <div style="float: right;">
-            <a id="userName">xxxx</a>
+            <a id="userName" style="color: black;">xxxx</a>
           </div>
 
           <br>
@@ -85,7 +82,7 @@ https://templatemo.com/tm-529-ramayana
 
         </div>
         <br>
-        
+
         <div style="clear: both;"></div>
 
         <!-- Page Heading -->
@@ -257,18 +254,18 @@ https://templatemo.com/tm-529-ramayana
       var invenTable;
       invenTable = $("#itemtable6").dataTable({
         language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
-                },
+          url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+        },
         responsive: true,
         ajax: {
           url: '/inventory',
 
           dataSrc: function (json) {
-             // Modify some columns   
-             for (let row = 0; row < json.length; row++) {
-                            // add new column 'number' and set its value
-                            json[row].number = row + 1;
-                        }
+            // Modify some columns   
+            for (let row = 0; row < json.length; row++) {
+              // add new column 'number' and set its value
+              json[row].number = row + 1;
+            }
 
 
             return json;

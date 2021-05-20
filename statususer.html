@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <link rel="stylesheet" href="bgall.css">
-    <title>คลังวัสดุ</title>
+    <title>ติดตามวัสดุ</title>
 
 
 
@@ -233,28 +233,8 @@ https://templatemo.com/tm-529-ramayana
 
 <script>
     $(document).ready(function () {
-      var invenTable;
-      invenTable = $("#itemtable6").dataTable({
-        responsive: true,
-        ajax: {
-          url: '/inventory',
-
-          dataSrc: function (json) {
-
-            return json;
-          },
-        },
-        // columns: [
-        //   { 'data': 'product_no', title: "ลำดับ" },
-        //   { 'data': 'product_id', title: "รหัสวัสดุ" },
-        //   { 'data': 'name_pro', title: "รายการวัสดุ" },
-        //   { 'data': 'amount_pro', title: "จำนวนวัสดุ" },
-        //   { 'data': 'unit_pro', title: "หน่วยนับ" },
-
-
-        // ],
-
-      })
+     
+        $("#userName")[0].innerText = localStorage.getItem("userName")
 
       $("#menuuser1").click(function () {
         window.location.replace("/index");
@@ -280,7 +260,7 @@ https://templatemo.com/tm-529-ramayana
 
 </head>
 
-<body class="is-preload" style="background-color: whitesmoke;">
+<body class="is-preload" style="background-color: #f2f2ef;"">
 
     <!-- Wrapper -->
     <div id="wrapper">
@@ -306,14 +286,14 @@ https://templatemo.com/tm-529-ramayana
                                 class="fa fa-user-circle"></i></h1>
                     </div>
                     <div style="float: right;">
-                        <span>Panuwat Duangkham</span>
+                        <a id="userName">xxxx</a>
                     </div>
 
                 </div>
                 <br>
 
                 <div id="textbox">
-                    <h1 class="alignleft" style="color: black">ติดตามพัสดุ</h1>
+                    <h1 class="alignleft" style="color: black">ติดตามวัสดุ</h1>
 
                 </div>
                 <br>
@@ -354,6 +334,7 @@ https://templatemo.com/tm-529-ramayana
                                                 <li class="active step0"></li>
                                                 <li class="step0"></li>
                                                 <li class="step0"></li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -550,6 +531,8 @@ https://templatemo.com/tm-529-ramayana
                         <br>
                         <br>
                         <br>
+                        <br>
+                        <br>
 
                         <center>
                             <div class="col-md-9">
@@ -573,7 +556,13 @@ https://templatemo.com/tm-529-ramayana
                 <br>
                 <br>
                 <br>
-            </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+               
+             </div>
 
         </div>
     </div>

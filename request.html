@@ -92,6 +92,7 @@ https://templatemo.com/tm-529-ramayana
               requis_proid: $("#request_proid").val(),
               requis_pro: $("#request_pro").val(),
               requis_quantity: $("#request_quantity").val(),
+              requis_count : $("#request_count").val(),
               purpose: $("#request_purpose").val(),
             },
           }).done(function (data, state, xhr) {
@@ -116,6 +117,7 @@ https://templatemo.com/tm-529-ramayana
           const selectedData = requisTable.row(currentRow).data();
           $("#request_pro").val(selectedData.name_pro).prop('disabled', true);
           $("#request_proid").val(selectedData.product_id).prop('disabled', true);
+          $("#request_count").val(selectedData.unit_pro).prop();
           // $("#addDate").val(selectedData.addDate).prop('disabled', true);
           $("#addRequest").modal("show");
           // $("input[name='edit_amount']").val("");
@@ -148,7 +150,7 @@ https://templatemo.com/tm-529-ramayana
 
 </head>
 
-<body class="is-preload" style="background-color: whitesmoke;">
+<body class="is-preload" style="background-color: #f2f2ef;"">
 
   <!-- Wrapper -->
   <div id="wrapper">
@@ -208,6 +210,8 @@ https://templatemo.com/tm-529-ramayana
                   <input type="text" class="form-control mb-1" id="request_pro">
                   จำนวน
                   <input type="number" min="0" class="form-control mb-1" id="request_quantity">
+                  หน่วยนับ
+                  <input type="text" class="form-control mb-1" id="request_count">
                   หมายเหตุ
                   <textarea class="form-control" id="request_purpose" rows="5"></textarea>
                 </div>
@@ -338,6 +342,11 @@ https://templatemo.com/tm-529-ramayana
             <br>
             <br>
             <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <center>
               <div class="col-md-9">
                 <div class="container">
@@ -349,23 +358,8 @@ https://templatemo.com/tm-529-ramayana
         </nav>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+     
+      
       </div>
 
     </div>

@@ -27,7 +27,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-    <link rel="stylesheet" href="bgall.css">
+    <!-- <link rel="stylesheet" href="bgall.css"> -->
     <title>ประวัติการเบิก</title>
 
 
@@ -44,36 +44,40 @@ https://templatemo.com/tm-529-ramayana
 
     <script>
         $(document).ready(function () {
-            var invenTable;
-            invenTable = $("#itemtable6").dataTable({
+            var hisTable;
+            hisTable = $("#itemtable6").DataTable({
                 language: {
                     url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
                 },
                 responsive: true,
                 ajax: {
-                    url: '/inventory',
+                    url: '/userhis',
 
                     dataSrc: function (json) {
+                        // Modify some columns   
                         for (let row = 0; row < json.length; row++) {
                             // add new column 'number' and set its value
                             json[row].number = row + 1;
                         }
 
-
                         return json;
                     },
+
                 },
                 columns: [
-                    { 'data': 'number', title: "ลำดับ" },
-                    { 'data': 'product_id', title: "รหัสวัสดุ" },
-                    { 'data': 'name_pro', title: "รายการวัสดุ" },
-                    { 'data': 'amount_pro', title: "จำนวนวัสดุ" },
-                    { 'data': 'unit_pro', title: "หน่วยนับ" },
-
+                     {'data': 'number'},
+                    { 'data': 'requis_id' },
+                    { 'data': 'requis_pickup'},
+                    { 'data': 'requis_proid' },
+                    { 'data': 'requis_pro'},
+                    { 'data': 'purpose'},
+                    { 'data': 'requis_quantity'},
+                    { 'data': 'requis_count'},
+                    
 
                 ],
 
-            })
+      });
             $("#menuadmin1").click(function () {
                 window.location.replace("/adminrequest");
 
@@ -98,7 +102,7 @@ https://templatemo.com/tm-529-ramayana
 
 </head>
 
-<body class="is-preload" style="background-color: whitesmoke;">
+<body class="is-preload" style="background-color: #f2f2ef;">
 
     <!-- Wrapper -->
     <div id="wrapper">
@@ -179,7 +183,19 @@ https://templatemo.com/tm-529-ramayana
 
 
                 <table id="itemtable6"  class="table table-striped table-bordered" style="width: 100%;">
-                                     
+                    <thead>
+                        <tr>
+                          <td>ลำดับ</td>
+                          <td>เลขที่การเบิก</td>
+                          <td>วันที่</td>
+                          <td>รหัสวัสดุ</td>
+                          <td>ชื่อวัสดุ</td>
+                          <td>หมายเหตุ</td>
+                          <td>จำนวนที่ขอเบิก</td>
+                          <td>หน่วยนับ</td>
+                        </tr>
+                      </thead>
+            
                 </table>
 
 

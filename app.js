@@ -130,8 +130,8 @@ app.get("/users", function (req, res) {
 });
 
 app.post("/requestitem", (req, res) => {
-    let sql = "INSERT INTO requisition (requis_date,requis_proid,requis_pro,requis_quantity,purpose) VALUES ?";
-    let test = [[req.body.requis_date, req.body.requis_proid, req.body.requis_pro, req.body.requis_quantity, req.body.purpose]];
+    let sql = "INSERT INTO requisition (requis_date,requis_proid,requis_pro,requis_quantity,requis_count,purpose) VALUES ?";
+    let test = [[req.body.requis_date, req.body.requis_proid, req.body.requis_pro, req.body.requis_quantity,req.body.requis_count, req.body.purpose]];
     con.query(sql, [test], function (err, result) {
         if (err) {
             console.log(err);
@@ -228,12 +228,11 @@ app.get("/adminreq", function (req, res) {
     });
 });
 app.post("/adminapp", function (req, res) {
-    const requis_proid = req.body.requis_proid;
-    // console.log(requis_proid);
+    const requis_proid = req.body.request_proid;
     const requis_status = req.body.requis_status;
     const requis_quantity = req.body.requis_quantity;
     const sql = "UPDATE product SET requis_quantity = ?, requis_status = 1 WHERE requis_proid = ?";
-    con.query(sql, [requis_quantity,requis_status,requis_proid,], function (err, result, fields) {
+    con.query(sql, [requis_quantity,requis_status,requis_proid], function (err, result, fields) {
         if (err) {
             console.log(err);
             res.status(500).end("Server error");
@@ -436,7 +435,7 @@ app.delete("/inven/:product_id", function (req, res) {
 });
 //---------------- stat ---------------------------------
 app.get("/statitem", function (req, res) {
-    const sql = "SELECT requis_pickup,product_id ,requis_pro, requis_quantity, requis_status FROM requisition INNER JOIN product ON requis_id = product_no WHERE  requis_status = 2";
+    const sql = "SELECT requis_pickup,requis_proid, requis_pro,requis_quantity, requis_status,unit_pro FROM requisition INNER JOIN product ON requis_id = product_no WHERE  requis_status = 2";
     con.query(sql, function (err, result, fields) {
         if (err) {
             console.error(err.message);
